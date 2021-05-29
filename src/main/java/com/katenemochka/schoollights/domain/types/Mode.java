@@ -7,20 +7,20 @@ import java.util.List;
 
 /*Спосіб керування освітленням*/
 @Entity
-@Table(name = "control_types")
-public class ControlType {
+@Table(name = "modes")
+public class Mode {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String displayName;
-    @OneToMany(mappedBy = "controlType")
+    @OneToMany(mappedBy = "mode")
     List<Zone> zones;
 
-    public ControlType() {
+    public Mode() {
     }
 
-    public ControlType(String name, String displayName) {
+    public Mode(String name, String displayName) {
         this.name = name;
         this.displayName = displayName;
     }

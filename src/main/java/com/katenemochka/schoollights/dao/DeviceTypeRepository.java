@@ -1,6 +1,5 @@
 package com.katenemochka.schoollights.dao;
 
-import com.katenemochka.schoollights.domain.types.ControlType;
 import com.katenemochka.schoollights.domain.types.DeviceType;
 import org.springframework.data.jpa.repository.JpaRepository;
 

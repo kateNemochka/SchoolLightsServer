@@ -1,6 +1,6 @@
 package com.katenemochka.schoollights.domain;
 
-import com.katenemochka.schoollights.domain.types.ControlType;
+import com.katenemochka.schoollights.domain.types.Mode;
 import com.katenemochka.schoollights.domain.types.ZoneType;
 
 import javax.persistence.*;
@@ -23,8 +23,8 @@ public class Zone {
     @OneToMany(mappedBy = "zone")
     private List<Row> rowList;
     @ManyToOne
-    @JoinColumn(name="conrol_type_id")
-    private ControlType controlType;
+    @JoinColumn(name="mode_id")
+    private Mode mode;
     private int controlTimeout;
     private int dimmerValue;
 
@@ -80,12 +80,12 @@ public class Zone {
         this.rowList = rowList;
     }
 
-    public ControlType getControlType() {
-        return controlType;
+    public Mode getMode() {
+        return mode;
     }
 
-    public void setControlType(ControlType controlType) {
-        this.controlType = controlType;
+    public void setMode(Mode mode) {
+        this.mode = mode;
     }
 
     public int getControlTimeout() {
