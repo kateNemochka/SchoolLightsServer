@@ -6,21 +6,21 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "modes")
-public class Mode {
+@Table(name = "periods")
+public class Period {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String displayName;
-    @OneToMany(mappedBy = "mode")
+    @OneToMany(mappedBy = "period")
     List<Room> rooms;
 
-    public Mode() {
+    public Period() {
     }
 
-    public Mode(String name, String displayName) {
+    public Period(String name, String displayName) {
         this.name = name;
         this.displayName = displayName;
     }

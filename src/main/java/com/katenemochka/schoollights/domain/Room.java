@@ -1,6 +1,6 @@
 package com.katenemochka.schoollights.domain;
 
-import com.katenemochka.schoollights.domain.types.Mode;
+import com.katenemochka.schoollights.domain.types.Period;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,8 +17,8 @@ public class Room {
     private String description;
     private boolean isInner;
     @ManyToOne
-    @JoinColumn(name="mode_id")
-    private Mode mode;
+    @JoinColumn(name="period_id")
+    private Period period;
     @OneToMany(mappedBy = "room")
     private List<Zone> zones;
     @OneToOne(mappedBy = "room")
@@ -68,12 +68,12 @@ public class Room {
         this.description = description;
     }
 
-    public Mode getMode() {
-        return mode;
+    public Period getMode() {
+        return period;
     }
 
-    public void setMode(Mode mode) {
-        this.mode = mode;
+    public void setMode(Period period) {
+        this.period = period;
     }
 
     public List<Zone> getZones() {

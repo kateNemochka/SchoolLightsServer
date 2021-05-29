@@ -1,7 +1,6 @@
 package com.katenemochka.schoollights.domain.types;
 
 import com.katenemochka.schoollights.domain.Zone;
-import com.katenemochka.schoollights.domain.types.Mode;
 
 import javax.persistence.*;
 import java.util.List;
@@ -18,11 +17,11 @@ public class ZoneType {
     private int lightMinimum;
     private int lightMaximum;
     @ElementCollection
-    @MapKeyJoinColumn(name="mode_id")
-    Map<Mode, Integer> detectionIntervals;
+    @MapKeyJoinColumn(name="period_id")
+    Map<Period, Integer> detectionIntervals;
     @ElementCollection
-    @MapKeyJoinColumn(name="mode_id")
-    Map<Mode, Integer> lightTimeouts;
+    @MapKeyJoinColumn(name="period_id")
+    Map<Period, Integer> lightTimeouts;
     @OneToMany(mappedBy = "zoneType")
     List<Zone> zones;
 
@@ -70,19 +69,19 @@ public class ZoneType {
         this.lightMaximum = lightMaximum;
     }
 
-    public Map<Mode, Integer> getDetectionIntervals() {
+    public Map<Period, Integer> getDetectionIntervals() {
         return detectionIntervals;
     }
 
-    public void setDetectionIntervals(Map<Mode, Integer> detectionIntervals) {
+    public void setDetectionIntervals(Map<Period, Integer> detectionIntervals) {
         this.detectionIntervals = detectionIntervals;
     }
 
-    public Map<Mode, Integer> getLightTimeouts() {
+    public Map<Period, Integer> getLightTimeouts() {
         return lightTimeouts;
     }
 
-    public void setLightTimeouts(Map<Mode, Integer> lightTimeouts) {
+    public void setLightTimeouts(Map<Period, Integer> lightTimeouts) {
         this.lightTimeouts = lightTimeouts;
     }
 

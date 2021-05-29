@@ -1,9 +1,9 @@
 package com.katenemochka.schoollights.config;
 
 import com.katenemochka.schoollights.dao.ControlTypeRepository;
-import com.katenemochka.schoollights.dao.ModeRepository;
+import com.katenemochka.schoollights.dao.PeriodRepository;
 import com.katenemochka.schoollights.domain.types.ControlType;
-import com.katenemochka.schoollights.domain.types.Mode;
+import com.katenemochka.schoollights.domain.types.Period;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -16,15 +16,15 @@ import java.util.Map;
 public class DataLoader implements ApplicationRunner {
 
     private ControlTypeRepository controlTypeRepository;
-    private ModeRepository modeRepository;
+    private PeriodRepository periodRepository;
 
     private Map<String, String> controlTypesMap;
-    private Map<String, String> modesMap;
+    private Map<String, String> periodsMap;
 
     @Autowired
-    public DataLoader(ControlTypeRepository controlTypeRepository, ModeRepository modeRepository) {
+    public DataLoader(ControlTypeRepository controlTypeRepository, PeriodRepository periodRepository) {
         this.controlTypeRepository = controlTypeRepository;
-        this.modeRepository = modeRepository;
+        this.periodRepository = periodRepository;
 
         controlTypesMap = new HashMap<>();
         controlTypesMap.put("INIT", "Ініціалізація");
@@ -35,10 +35,10 @@ public class DataLoader implements ApplicationRunner {
         controlTypesMap.put("OFF", "Вимкнути");
         controlTypesMap.put("PRESENTATION", "Режим презентації");
 
-        modesMap = new HashMap<>();
-        modesMap.put("LESSON", "Урок");
-        modesMap.put("BREAK", "Перерва");
-        modesMap.put("PASSIVE", "Пасивний режим");
+        periodsMap = new HashMap<>();
+        periodsMap.put("LESSON", "Урок");
+        periodsMap.put("BREAK", "Перерва");
+        periodsMap.put("PASSIVE", "Пасивний режим");
     }
 
     public void run(ApplicationArguments args) {
@@ -47,9 +47,9 @@ public class DataLoader implements ApplicationRunner {
                 controlTypeRepository.save(new ControlType(controlTypeName, controlTypesMap.get(controlTypeName)));
             }
         }
-        for (String modeName : modesMap.keySet()) {
-            if (modeRepository.findByName(modeName) == null) {
-                modeRepository.save(new Mode(modeName, modesMap.get(modeName)));
+        for (String modeName : periodsMap.keySet()) {
+            if (periodRepository.findByName(modeName) == null) {
+                periodRepository.save(new Period(modeName, periodsMap.get(modeName)));
             }
         }
     }
