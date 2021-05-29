@@ -68,11 +68,11 @@ public class Room {
         this.description = description;
     }
 
-    public Period getMode() {
+    public Period getPeriod() {
         return period;
     }
 
-    public void setMode(Period period) {
+    public void setPeriod(Period period) {
         this.period = period;
     }
 
