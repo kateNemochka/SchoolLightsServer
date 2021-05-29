@@ -43,12 +43,12 @@ public class DataLoader implements ApplicationRunner {
 
     public void run(ApplicationArguments args) {
         for (String controlTypeName : controlTypesMap.keySet()) {
-            if (controlTypeRepository.findByName(controlTypeName) != null) {
+            if (controlTypeRepository.findByName(controlTypeName) == null) {
                 controlTypeRepository.save(new ControlType(controlTypeName, controlTypesMap.get(controlTypeName)));
             }
         }
         for (String modeName : modesMap.keySet()) {
-            if (modeRepository.findByName(modeName) != null) {
+            if (modeRepository.findByName(modeName) == null) {
                 modeRepository.save(new Mode(modeName, modesMap.get(modeName)));
             }
         }
