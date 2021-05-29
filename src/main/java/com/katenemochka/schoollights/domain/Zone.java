@@ -23,7 +23,7 @@ public class Zone {
     @OneToMany(mappedBy = "zone")
     private List<Row> rowList;
     @ManyToOne
-    @JoinColumn(name="mode_id")
+    @JoinColumn(name="conrol_type_id")
     private ControlType controlType;
     private int controlTimeout;
     private int dimmerValue;

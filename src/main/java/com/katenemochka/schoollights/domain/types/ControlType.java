@@ -14,7 +14,7 @@ public class ControlType {
     private Long id;
     private String name;
     private String displayName;
-    @OneToMany(mappedBy = "mode")
+    @OneToMany(mappedBy = "controlType")
     List<Zone> zones;
 
     public ControlType() {

@@ -18,8 +18,10 @@ public class ZoneType {
     private int lightMinimum;
     private int lightMaximum;
     @ElementCollection
+    @MapKeyJoinColumn(name="mode_id")
     Map<Mode, Integer> detectionIntervals;
     @ElementCollection
+    @MapKeyJoinColumn(name="mode_id")
     Map<Mode, Integer> lightTimeouts;
     @OneToMany(mappedBy = "zoneType")
     List<Zone> zones;
