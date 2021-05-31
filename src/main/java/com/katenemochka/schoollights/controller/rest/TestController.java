@@ -1,6 +1,6 @@
 package com.katenemochka.schoollights.controller.rest;
 
-import com.katenemochka.schoollights.mqtt.MqttSpringClient;
+import com.katenemochka.schoollights.component.mqtt.MqttSpringClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

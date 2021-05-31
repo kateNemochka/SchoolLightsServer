@@ -1,4 +1,4 @@
-package com.katenemochka.schoollights.mqtt;
+package com.katenemochka.schoollights.component.mqtt;
 
 public class MqttSubscriber {
 }

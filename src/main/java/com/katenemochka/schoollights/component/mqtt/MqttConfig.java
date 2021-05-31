@@ -1,4 +1,4 @@
-package com.katenemochka.schoollights.mqtt;
+package com.katenemochka.schoollights.component.mqtt;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

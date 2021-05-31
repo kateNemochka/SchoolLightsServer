@@ -1,4 +1,4 @@
-package com.katenemochka.schoollights.mqtt;
+package com.katenemochka.schoollights.component.mqtt;
 
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
