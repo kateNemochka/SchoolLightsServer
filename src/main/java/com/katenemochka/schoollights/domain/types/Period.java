@@ -1,6 +1,7 @@
 package com.katenemochka.schoollights.domain.types;
 
 import com.katenemochka.schoollights.domain.Room;
+import com.katenemochka.schoollights.domain.Schedule;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
@@ -17,6 +18,8 @@ public class Period implements Comparable<Period> {
     private String displayName;
     @OneToMany(mappedBy = "period")
     List<Room> rooms;
+    @OneToMany(mappedBy = "period")
+    List<Schedule> scheduleEntries;
 
     public Period() {
     }
@@ -65,5 +68,13 @@ public class Period implements Comparable<Period> {
         else if (this.id < period.getId())
             return -1;
         return 0;
+    }
+
+    public List<Schedule> getScheduleEntries() {
+        return scheduleEntries;
+    }
+
+    public void setScheduleEntries(List<Schedule> scheduleEntries) {
+        this.scheduleEntries = scheduleEntries;
     }
 }
