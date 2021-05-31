@@ -1,10 +1,14 @@
 package com.katenemochka.schoollights.domain.types;
 
 import com.katenemochka.schoollights.domain.Zone;
+import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "zone_types")
@@ -73,12 +77,28 @@ public class ZoneType {
         return detectionIntervals;
     }
 
+    public List<Integer> getDetectionIntervalsSorted() {
+        return detectionIntervals.keySet()
+                .stream()
+                .sorted(Period::compareTo)
+                .mapToInt(p -> detectionIntervals.get(p))
+                .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+    }
+
     public void setDetectionIntervals(Map<Period, Integer> detectionIntervals) {
         this.detectionIntervals = detectionIntervals;
     }
 
     public Map<Period, Integer> getLightTimeouts() {
         return lightTimeouts;
+    }
+
+    public List<Integer> getLightTimeoutsSorted() {
+        return lightTimeouts.keySet()
+                .stream()
+                .sorted(Period::compareTo)
+                .mapToInt(p -> lightTimeouts.get(p))
+                .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
     }
 
     public void setLightTimeouts(Map<Period, Integer> lightTimeouts) {

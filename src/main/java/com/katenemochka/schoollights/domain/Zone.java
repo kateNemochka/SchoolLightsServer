@@ -25,7 +25,7 @@ public class Zone {
     @ManyToOne
     @JoinColumn(name="mode_id")
     private Mode mode;
-    private int controlTimeout;
+    private int modeTimeout;
     private int dimmerValue;
 
 
@@ -88,12 +88,12 @@ public class Zone {
         this.mode = mode;
     }
 
-    public int getControlTimeout() {
-        return controlTimeout;
+    public int getModeTimeout() {
+        return modeTimeout;
     }
 
-    public void setControlTimeout(int controlTimeout) {
-        this.controlTimeout = controlTimeout;
+    public void setModeTimeout(int controlTimeout) {
+        this.modeTimeout = controlTimeout;
     }
 
     public int getDimmerValue() {

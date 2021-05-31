@@ -1,13 +1,14 @@
 package com.katenemochka.schoollights.domain.types;
 
 import com.katenemochka.schoollights.domain.Room;
+import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "periods")
-public class Period {
+public class Period implements Comparable<Period> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -55,5 +56,14 @@ public class Period {
 
     public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
+    }
+
+    @Override
+    public int compareTo(@NotNull Period period) {
+        if (this.id > period.getId())
+            return 1;
+        else if (this.id < period.getId())
+            return -1;
+        return 0;
     }
 }

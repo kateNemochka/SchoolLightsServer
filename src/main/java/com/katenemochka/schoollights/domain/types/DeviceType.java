@@ -1,5 +1,7 @@
 package com.katenemochka.schoollights.domain.types;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.persistence.*;
 
 @Entity
@@ -38,4 +40,5 @@ public class DeviceType {
     public void setOnePerZone(boolean onePerZone) {
         this.onePerZone = onePerZone;
     }
+
 }
