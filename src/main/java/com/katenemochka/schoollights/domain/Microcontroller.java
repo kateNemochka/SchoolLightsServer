@@ -9,7 +9,6 @@ public class Microcontroller {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String clientId;
     private String ipAddress;
     private String macAddress;
     private String mqttUsername;
@@ -31,14 +30,6 @@ public class Microcontroller {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
     }
 
     public String getIpAddress() {
