@@ -16,6 +16,7 @@ public class Room {
     private String purpose; //Кабінет інформатики
     private String description;
     private boolean isInner;
+    private int colorTemperature;
     @ManyToOne
     @JoinColumn(name="period_id")
     private Period period;
@@ -98,5 +99,13 @@ public class Room {
 
     public void setInner(boolean inner) {
         isInner = inner;
+    }
+
+    public int getColorTemperature() {
+        return colorTemperature;
+    }
+
+    public void setColorTemperature(int colorTemperature) {
+        this.colorTemperature = colorTemperature;
     }
 }
