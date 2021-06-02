@@ -1,11 +1,15 @@
 package com.katenemochka.schoollights.domain.types;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "device_types")
+@Setter
+@Getter
 public class DeviceType {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -16,29 +20,4 @@ public class DeviceType {
 
     public DeviceType() {
     }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public boolean isOnePerZone() {
-        return onePerZone;
-    }
-
-    public void setOnePerZone(boolean onePerZone) {
-        this.onePerZone = onePerZone;
-    }
-
 }

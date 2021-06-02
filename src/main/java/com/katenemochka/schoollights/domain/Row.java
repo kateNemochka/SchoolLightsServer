@@ -1,9 +1,14 @@
 package com.katenemochka.schoollights.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="lights_row")
+@Setter
+@Getter
 public class Row {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -15,36 +20,5 @@ public class Row {
     private Zone zone;
 
     public Row() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-    public Zone getZone() {
-        return zone;
-    }
-
-    public void setZone(Zone zone) {
-        this.zone = zone;
-    }
-
-    public int getRowNumberFromWindow() {
-        return rowNumberFromWindow;
-    }
-
-    public void setRowNumberFromWindow(int rowNumberFromWindow) {
-        this.rowNumberFromWindow = rowNumberFromWindow;
-    }
-
-    public int getCustomDimValue() {
-        return customDimValue;
-    }
-
-    public void setCustomDimValue(int customDimValue) {
-        this.customDimValue = customDimValue;
     }
 }

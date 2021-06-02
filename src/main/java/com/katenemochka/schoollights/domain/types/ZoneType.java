@@ -1,6 +1,8 @@
 package com.katenemochka.schoollights.domain.types;
 
 import com.katenemochka.schoollights.domain.Zone;
+import lombok.Getter;
+import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
@@ -12,6 +14,8 @@ import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "zone_types")
+@Setter
+@Getter
 public class ZoneType {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -33,50 +37,6 @@ public class ZoneType {
     public ZoneType() {
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getLightMinimum() {
-        return lightMinimum;
-    }
-
-    public void setLightMinimum(int lightMinimum) {
-        this.lightMinimum = lightMinimum;
-    }
-
-    public int getLightMaximum() {
-        return lightMaximum;
-    }
-
-    public void setLightMaximum(int lightMaximum) {
-        this.lightMaximum = lightMaximum;
-    }
-
-    public Map<Period, Integer> getDetectionIntervals() {
-        return detectionIntervals;
-    }
-
     public List<Integer> getDetectionIntervalsSorted() {
         return detectionIntervals.keySet()
                 .stream()
@@ -85,31 +45,11 @@ public class ZoneType {
                 .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
     }
 
-    public void setDetectionIntervals(Map<Period, Integer> detectionIntervals) {
-        this.detectionIntervals = detectionIntervals;
-    }
-
-    public Map<Period, Integer> getLightTimeouts() {
-        return lightTimeouts;
-    }
-
     public List<Integer> getLightTimeoutsSorted() {
         return lightTimeouts.keySet()
                 .stream()
                 .sorted(Period::compareTo)
                 .mapToInt(p -> lightTimeouts.get(p))
                 .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
-    }
-
-    public void setLightTimeouts(Map<Period, Integer> lightTimeouts) {
-        this.lightTimeouts = lightTimeouts;
-    }
-
-    public List<Zone> getZones() {
-        return zones;
-    }
-
-    public void setZones(List<Zone> zones) {
-        this.zones = zones;
     }
 }
