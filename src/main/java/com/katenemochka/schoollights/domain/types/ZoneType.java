@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class ZoneType {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private long id;
+    private Long id;
     private String name;
     private String description;
     private int lightMinimum;

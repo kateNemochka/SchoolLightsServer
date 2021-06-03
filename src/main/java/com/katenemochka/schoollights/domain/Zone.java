@@ -15,7 +15,7 @@ import java.util.List;
 public class Zone {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private long id;
+    private Long id;
     @ManyToOne
     @JoinColumn(name="room_id", nullable=false)
     private Room room;

@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class DeviceType {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private long id;
+    private Long id;
     private String name;
     private boolean onePerZone;
 

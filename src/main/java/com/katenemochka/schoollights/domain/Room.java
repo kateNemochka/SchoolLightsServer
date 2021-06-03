@@ -14,7 +14,7 @@ import java.util.List;
 public class Room {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private long id;
+    private Long id;
     private String name; //207
     private int floor; //2
     private String purpose; //Кабінет інформатики

@@ -16,7 +16,7 @@ import java.util.Map;
 public class Device {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private long id;
+    private Long id;
     private String deviceName;
     @ManyToOne
     @JoinColumn(name="device_type_id", nullable=false)
