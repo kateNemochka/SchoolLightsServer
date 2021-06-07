@@ -1,23 +1,29 @@
 package com.katenemochka.schoollights.controller.rest;
 
+import com.katenemochka.schoollights.component.mqtt.MqttPublisher;
 import com.katenemochka.schoollights.component.mqtt.MqttSpringClient;
+import com.katenemochka.schoollights.service.PeriodService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-
-/**
- *
- * @author bam
- * 2020 March 5th 2013
- * TestController.java
- *
- */
 @RestController
-@RequestMapping("/")
-public class TestController {
+@RequestMapping("/mqtt")
+public class RestMqttController {
 
     @Autowired
     private MqttSpringClient mqttSpringClient;
+    @Autowired
+    private MqttPublisher mqttPublisher;
+    @Autowired
+    private PeriodService periodService;
+
+    @RequestMapping("/setPeriod/{period}")
+    public void setPeriod(@PathVariable("period") String periodName) {
+        mqttPublisher.publishPeriod(periodService.getPeriodByName(periodName));
+    }
 
     @GetMapping(value = "/publishTopic")
     public String publishTopic() {
