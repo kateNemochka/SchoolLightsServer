@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="uk">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Пристрої | БАЛ "Гармонія"</title>
+    <link th:replace="partials/_css-links"/>
+  </head>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:../../partials/_navbar.html -->
+      <div th:replace="partials/_navbar"></div>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:../../partials/_sidebar.html -->
+        <div th:replace="partials/_sidebar"></div>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="row">
+              <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h2 class="font-weight-semibold">Пристрої</h2>
+                    <p class="card-description text-muted">Усі пристрої будівлі, підключені до мікроконтролерів</p>
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>№</th>
+                          <th>Назва</th>
+                          <th>Тип</th>
+                          <th>Кабінет</th>
+                          <th>Зона</th>
+                          <th>Ряд світильників</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr th:each="device, iStat: ${devices}">
+                          <td th:text="${iStat.index + 1}">0</td>
+                          <td th:text="${device.deviceName}" class="font-weight-medium">Датчик руху біля вікна</td>
+                          <td th:text="${device.deviceType}">Датчик руху</td>
+                          <td th:text="${device.room}">207</td>
+                          <td th:text="${device.zone}">Теоретична зона</td>
+                          <td th:text="${device.row}">1</td>
+                          <td><a type="button" class="btn btn-light"
+                                    th:href="@{/devices/{device_id}(device_id=${device.id})}">Детальніше</a></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:../../partials/_footer.html -->
+          <footer th:replace="partials/_footer"></footer>
+          <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <script th:replace="partials/_js-links"></script>
+  </body>
+</html>
