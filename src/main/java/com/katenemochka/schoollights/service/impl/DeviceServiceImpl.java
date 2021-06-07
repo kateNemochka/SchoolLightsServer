@@ -20,39 +20,39 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public List<Device> getAll() {
-        List<Device> zones = deviceRepository.findAll();
-        return zones.isEmpty() ? new ArrayList<>() : zones;
+        List<Device> devices = deviceRepository.findAll();
+        return devices.isEmpty() ? new ArrayList<>() : devices;
     }
 
     @Override
     public Device getDeviceById(Long id) {
-        return deviceRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(("No zone /w id " + id)));
+        return deviceRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(("No device /w id " + id)));
     }
 
     @Override
-    public Device createOrUpdate(Device zone) {
-        if (zone.getId() != null) {
+    public Device createOrUpdate(Device device) {
+        if (device.getId() != null) {
 
-            Optional<Device> zoneOptional = deviceRepository.findById(zone.getId());
+            Optional<Device> deviceOptional = deviceRepository.findById(device.getId());
 
-            if (zoneOptional.isPresent()) {
-                Device newDevice = zoneOptional.get();
+            if (deviceOptional.isPresent()) {
+                Device newDevice = deviceOptional.get();
                 //TODO
-                //newDevice.setName(zone.getName());
+                //newDevice.setName(device.getName());
                 return deviceRepository.save(newDevice);
             }
         }
-        return deviceRepository.save(zone);
+        return deviceRepository.save(device);
     }
 
     @Override
     public void deleteDeviceById(Long id) {
-        Optional<Device> role = deviceRepository.findById(id);
+        Optional<Device> device = deviceRepository.findById(id);
 
-        if (role.isPresent()) {
+        if (device.isPresent()) {
             deviceRepository.deleteById(id);
         } else {
-            throw new EntityNotFoundException("There is no zone type with given id");
+            throw new EntityNotFoundException("There is no device type with given id");
         }
     }
 }

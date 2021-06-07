@@ -21,29 +21,29 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public List<Room> getAll() {
-        List<Room> zones = roomRepository.findAll();
-        return zones.isEmpty() ? new ArrayList<>() : zones;
+        List<Room> rooms = roomRepository.findAll();
+        return rooms.isEmpty() ? new ArrayList<>() : rooms;
     }
 
     @Override
     public Room getRoomById(Long id) {
-        return roomRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(("No zone /w id " + id)));
+        return roomRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(("No room /w id " + id)));
     }
 
     @Override
-    public Room createOrUpdate(Room zone) {
-        if (zone.getId() != null) {
+    public Room createOrUpdate(Room room) {
+        if (room.getId() != null) {
 
-            Optional<Room> zoneOptional = roomRepository.findById(zone.getId());
+            Optional<Room> roomOptional = roomRepository.findById(room.getId());
 
-            if (zoneOptional.isPresent()) {
-                Room newRoom = zoneOptional.get();
+            if (roomOptional.isPresent()) {
+                Room newRoom = roomOptional.get();
                 //TODO
-                //newRoom.setName(zone.getName());
+                //newRoom.setName(room.getName());
                 return roomRepository.save(newRoom);
             }
         }
-        return roomRepository.save(zone);
+        return roomRepository.save(room);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class RoomServiceImpl implements RoomService {
         if (role.isPresent()) {
             roomRepository.deleteById(id);
         } else {
-            throw new EntityNotFoundException("There is no zone type with given id");
+            throw new EntityNotFoundException("There is no room type with given id");
         }
     }
 }

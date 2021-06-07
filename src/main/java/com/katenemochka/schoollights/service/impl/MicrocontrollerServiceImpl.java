@@ -20,29 +20,29 @@ public class MicrocontrollerServiceImpl implements MicrocontrollerService {
 
     @Override
     public List<Microcontroller> getAll() {
-        List<Microcontroller> zones = microcontrollerRepository.findAll();
-        return zones.isEmpty() ? new ArrayList<>() : zones;
+        List<Microcontroller> microcontrollers = microcontrollerRepository.findAll();
+        return microcontrollers.isEmpty() ? new ArrayList<>() : microcontrollers;
     }
 
     @Override
     public Microcontroller getMicrocontrollerById(Long id) {
-        return microcontrollerRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(("No zone /w id " + id)));
+        return microcontrollerRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(("No microcontroller /w id " + id)));
     }
 
     @Override
-    public Microcontroller createOrUpdate(Microcontroller zone) {
-        if (zone.getId() != null) {
+    public Microcontroller createOrUpdate(Microcontroller microcontroller) {
+        if (microcontroller.getId() != null) {
 
-            Optional<Microcontroller> zoneOptional = microcontrollerRepository.findById(zone.getId());
+            Optional<Microcontroller> microcontrollerOptional = microcontrollerRepository.findById(microcontroller.getId());
 
-            if (zoneOptional.isPresent()) {
-                Microcontroller newMicrocontroller = zoneOptional.get();
+            if (microcontrollerOptional.isPresent()) {
+                Microcontroller newMicrocontroller = microcontrollerOptional.get();
                 //TODO
-                //newMicrocontroller.setName(zone.getName());
+                //newMicrocontroller.setName(microcontroller.getName());
                 return microcontrollerRepository.save(newMicrocontroller);
             }
         }
-        return microcontrollerRepository.save(zone);
+        return microcontrollerRepository.save(microcontroller);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class MicrocontrollerServiceImpl implements MicrocontrollerService {
         if (role.isPresent()) {
             microcontrollerRepository.deleteById(id);
         } else {
-            throw new EntityNotFoundException("There is no zone type with given id");
+            throw new EntityNotFoundException("There is no microcontroller type with given id");
         }
     }
 }

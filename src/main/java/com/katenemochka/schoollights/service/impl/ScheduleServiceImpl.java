@@ -20,39 +20,39 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public List<Schedule> getAll() {
-        List<Schedule> zones = scheduleRepository.findAll();
-        return zones.isEmpty() ? new ArrayList<>() : zones;
+        List<Schedule> schedules = scheduleRepository.findAll();
+        return schedules.isEmpty() ? new ArrayList<>() : schedules;
     }
 
     @Override
     public Schedule getScheduleById(Long id) {
-        return scheduleRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(("No zone /w id " + id)));
+        return scheduleRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(("No schedule /w id " + id)));
     }
 
     @Override
-    public Schedule createOrUpdate(Schedule zone) {
-        if (zone.getId() != null) {
+    public Schedule createOrUpdate(Schedule schedule) {
+        if (schedule.getId() != null) {
 
-            Optional<Schedule> zoneOptional = scheduleRepository.findById(zone.getId());
+            Optional<Schedule> scheduleOptional = scheduleRepository.findById(schedule.getId());
 
-            if (zoneOptional.isPresent()) {
-                Schedule newSchedule = zoneOptional.get();
+            if (scheduleOptional.isPresent()) {
+                Schedule newSchedule = scheduleOptional.get();
                 //TODO
                 //newSchedule.setName(zone.getName());
                 return scheduleRepository.save(newSchedule);
             }
         }
-        return scheduleRepository.save(zone);
+        return scheduleRepository.save(schedule);
     }
 
     @Override
     public void deleteScheduleById(Long id) {
-        Optional<Schedule> role = scheduleRepository.findById(id);
+        Optional<Schedule> schedule = scheduleRepository.findById(id);
 
-        if (role.isPresent()) {
+        if (schedule.isPresent()) {
             scheduleRepository.deleteById(id);
         } else {
-            throw new EntityNotFoundException("There is no zone type with given id");
+            throw new EntityNotFoundException("There is no schedule type with given id");
         }
     }
 }

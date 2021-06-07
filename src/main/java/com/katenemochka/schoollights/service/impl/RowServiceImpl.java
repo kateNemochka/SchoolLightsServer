@@ -2,7 +2,6 @@ package com.katenemochka.schoollights.service.impl;
 
 import com.katenemochka.schoollights.dao.RowRepository;
 import com.katenemochka.schoollights.domain.Row;
-import com.katenemochka.schoollights.domain.Row;
 import com.katenemochka.schoollights.service.RowService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,29 +20,29 @@ public class RowServiceImpl implements RowService {
 
     @Override
     public List<Row> getAll() {
-        List<Row> zones = rowRepository.findAll();
-        return zones.isEmpty() ? new ArrayList<>() : zones;
+        List<Row> rows = rowRepository.findAll();
+        return rows.isEmpty() ? new ArrayList<>() : rows;
     }
 
     @Override
     public Row getRowById(Long id) {
-        return rowRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(("No zone /w id " + id)));
+        return rowRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(("No row /w id " + id)));
     }
 
     @Override
-    public Row createOrUpdate(Row zone) {
-        if (zone.getId() != null) {
+    public Row createOrUpdate(Row row) {
+        if (row.getId() != null) {
 
-            Optional<Row> zoneOptional = rowRepository.findById(zone.getId());
+            Optional<Row> rowOptional = rowRepository.findById(row.getId());
 
-            if (zoneOptional.isPresent()) {
-                Row newRow = zoneOptional.get();
+            if (rowOptional.isPresent()) {
+                Row newRow = rowOptional.get();
                 //TODO
-                //newRow.setName(zone.getName());
+                //newRow.setName(row.getName());
                 return rowRepository.save(newRow);
             }
         }
-        return rowRepository.save(zone);
+        return rowRepository.save(row);
     }
 
     @Override
@@ -53,7 +52,7 @@ public class RowServiceImpl implements RowService {
         if (role.isPresent()) {
             rowRepository.deleteById(id);
         } else {
-            throw new EntityNotFoundException("There is no zone type with given id");
+            throw new EntityNotFoundException("There is no row type with given id");
         }
     }
 }

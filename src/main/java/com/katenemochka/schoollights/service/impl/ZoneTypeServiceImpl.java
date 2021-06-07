@@ -1,8 +1,6 @@
 package com.katenemochka.schoollights.service.impl;
 
-import com.katenemochka.schoollights.dao.ZoneRepository;
 import com.katenemochka.schoollights.dao.ZoneTypeRepository;
-import com.katenemochka.schoollights.domain.Zone;
 import com.katenemochka.schoollights.domain.types.ZoneType;
 import com.katenemochka.schoollights.service.ZoneTypeService;
 import lombok.Data;
@@ -48,9 +46,9 @@ public class ZoneTypeServiceImpl implements ZoneTypeService {
 
     @Override
     public void deleteZoneTypeById(Long id) {
-        Optional<ZoneType> role = zoneTypeRepository.findById(id);
+        Optional<ZoneType> zoneType = zoneTypeRepository.findById(id);
 
-        if (role.isPresent()) {
+        if (zoneType.isPresent()) {
             zoneTypeRepository.deleteById(id);
         } else {
             throw new EntityNotFoundException("There is no zone type with given id");

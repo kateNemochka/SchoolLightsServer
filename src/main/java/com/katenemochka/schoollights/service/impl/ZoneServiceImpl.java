@@ -36,9 +36,9 @@ public class ZoneServiceImpl implements ZoneService {
             Optional<Zone> zoneOptional = zoneRepository.findById(zone.getId());
 
             if (zoneOptional.isPresent()) {
-                Zone newRole = zoneOptional.get();
-                newRole.setName(zone.getName());
-                return zoneRepository.save(newRole);
+                Zone newZone = zoneOptional.get();
+                newZone.setName(zone.getName());
+                return zoneRepository.save(newZone);
             }
         }
         return zoneRepository.save(zone);
@@ -46,9 +46,9 @@ public class ZoneServiceImpl implements ZoneService {
 
     @Override
     public void deleteZoneById(Long id) {
-        Optional<Zone> role = zoneRepository.findById(id);
+        Optional<Zone> zone = zoneRepository.findById(id);
 
-        if (role.isPresent()) {
+        if (zone.isPresent()) {
             zoneRepository.deleteById(id);
         } else {
             throw new EntityNotFoundException("There is no zone with given id");
