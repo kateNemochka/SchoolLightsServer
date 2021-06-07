@@ -18,38 +18,25 @@
               <h1 class="display-1 mb-0">500</h1>
             </div>
             <div class="col-lg-8 error-page-divider text-lg-left pl-lg-4">
-              <h2>SORRY!</h2>
-              <h3 class="font-weight-light">Internal server error!</h3>
+              <h2>ЙОЙ!</h2>
+              <h3>Ви натрапили на помилку</h3>
+              <h4 class="font-weight-light">Internal server error!</h4>
               <table>
                 <tr>
-                  <td>Date</td>
-                  <td th:text="${timestamp}"/>
-                </tr>
-                <tr>
                   <td>Path</td>
-                  <td th:text="${path}"/>
-                </tr>
-                <tr>
-                  <td>Error</td>
-                  <td th:text="${error}"/>
+                  <td th:text="${error_uri}"/>
                 </tr>
                 <tr>
                   <td>Status</td>
-                  <td th:text="${status}"/>
+                  <td th:text="${error_code}"/>
                 </tr>
                 <tr>
                   <td>Message</td>
-                  <td th:text="${message}"/>
+                  <td th:text="${error_message}"/>
                 </tr>
                 <tr>
                   <td>Exception</td>
-                  <td th:text="${exception}"/>
-                </tr>
-                <tr>
-                  <td>Trace</td>
-                  <td>
-                    <pre th:text="${trace}"/>
-                  </td>
+                  <td th:text="${error_exception}"/>
                 </tr>
               </table>
             </div>
@@ -57,13 +44,12 @@
 
           <div class="row mt-5">
             <div class="col-12 text-center mt-xl-2">
-              <a class="text-white font-weight-medium" href="../../index.html">Back to home</a>
+              <a class="text-white font-weight-medium" href="/">На головну</a>
             </div>
           </div>
           <div class="row mt-5">
             <div class="col-12 mt-xl-2">
-              <p class="text-white font-weight-medium text-center">Copyright &copy; 2020 All rights reserved.</p>
-              <p class="footer-text text-center text-center"><a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank"> Free Bootstrap template </a> from BootstrapDash templates</p>
+              <p th:replace="partials/_footer-included"></p>
             </div>
           </div>
         </div>
