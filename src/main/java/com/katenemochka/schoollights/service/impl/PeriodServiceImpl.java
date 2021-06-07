@@ -4,11 +4,12 @@ import com.katenemochka.schoollights.dao.PeriodRepository;
 import com.katenemochka.schoollights.domain.types.Period;
 import com.katenemochka.schoollights.service.PeriodService;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,43 +17,62 @@ import java.util.Optional;
 @Data
 public class PeriodServiceImpl implements PeriodService {
 
-    @Autowired
-    PeriodRepository periodRepository;
+    private final PeriodRepository periodRepository;
 
-    @Override
+    @Transactional
     public List<Period> getAll() {
         List<Period> periods = periodRepository.findAll();
         return periods.isEmpty() ? new ArrayList<>() : periods;
     }
 
-    @Override
     public Period getPeriodById(Long id) {
-        return periodRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(("No period /w id " + id)));
+        return periodRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(("No period /w id " + id)));
     }
 
-    @Override
+    public Period getPeriodByName(String name) {
+        return periodRepository.findByName(name.toUpperCase())
+                .orElseThrow(() -> new EntityNotFoundException("No period with name" + name));
+    }
+
     public Period createOrUpdate(Period period) {
         if (period.getId() != null) {
 
             Optional<Period> periodOptional = periodRepository.findById(period.getId());
 
             if (periodOptional.isPresent()) {
-                Period newRole = periodOptional.get();
-                newRole.setName(period.getName());
-                return periodRepository.save(newRole);
+                Period newPeriod = periodOptional.get();
+                newPeriod.setName(period.getName());
+                return periodRepository.save(newPeriod);
             }
         }
         return periodRepository.save(period);
     }
 
-    @Override
     public void deletePeriodById(Long id) {
-        Optional<Period> role = periodRepository.findById(id);
+        Optional<Period> period = periodRepository.findById(id);
 
-        if (role.isPresent()) {
+        if (period.isPresent()) {
             periodRepository.deleteById(id);
         } else {
             throw new EntityNotFoundException("There is no period with given id");
+        }
+    }
+
+    public void loadDefaultData() {
+        List<Period> defaultPeriods = new LinkedList<>();
+        defaultPeriods.add(new Period("LESSON", "Урок"));
+        defaultPeriods.add(new Period("BREAK", "Перерва"));
+        defaultPeriods.add(new Period("PASSIVE", "Пасивний режим"));
+
+        for (Period period : defaultPeriods) {
+            try {
+                Period existingPeriod = this.getPeriodByName(period.getName());
+                period.setId(existingPeriod.getId());
+            } catch (EntityNotFoundException ex) {
+                System.out.println(ex.getMessage());
+            }
+            this.createOrUpdate(period);
         }
     }
 }

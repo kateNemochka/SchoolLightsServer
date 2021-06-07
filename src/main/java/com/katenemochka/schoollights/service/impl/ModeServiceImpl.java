@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Data
@@ -20,29 +18,34 @@ public class ModeServiceImpl implements ModeService {
 
     @Override
     public List<Mode> getAll() {
-        List<Mode> zones = modeRepository.findAll();
-        return zones.isEmpty() ? new ArrayList<>() : zones;
+        List<Mode> modes = modeRepository.findAll();
+        return modes.isEmpty() ? new ArrayList<>() : modes;
     }
 
     @Override
     public Mode getModeById(Long id) {
-        return modeRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(("No zone /w id " + id)));
+        return modeRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(("No mode /w id " + id)));
     }
 
     @Override
-    public Mode createOrUpdate(Mode zone) {
-        if (zone.getId() != null) {
+    public Mode getModeByName(String name) {
+        return modeRepository.findByName(name)
+                .orElseThrow(() -> new EntityNotFoundException(("No mode with name " + name)));
+    }
 
-            Optional<Mode> zoneOptional = modeRepository.findById(zone.getId());
+    @Override
+    public Mode createOrUpdate(Mode mode) {
+        if (mode.getId() != null) {
 
-            if (zoneOptional.isPresent()) {
-                Mode newMode = zoneOptional.get();
-                //TODO
-                //newMode.setName(zone.getName());
+            Optional<Mode> modeOptional = modeRepository.findById(mode.getId());
+
+            if (modeOptional.isPresent()) {
+                Mode newMode = modeOptional.get();
                 return modeRepository.save(newMode);
             }
         }
-        return modeRepository.save(zone);
+        return modeRepository.save(mode);
     }
 
     @Override
@@ -52,7 +55,28 @@ public class ModeServiceImpl implements ModeService {
         if (role.isPresent()) {
             modeRepository.deleteById(id);
         } else {
-            throw new EntityNotFoundException("There is no zone type with given id");
+            throw new EntityNotFoundException("There is no mode type with given id");
+        }
+    }
+
+    public void loadDefaultData() {
+        List<Mode> defaultModes = new LinkedList<>();
+        defaultModes.add(new Mode("INIT", "Ініціалізація"));
+        defaultModes.add(new Mode("AUTO", "Автоматичний"));
+        defaultModes.add(new Mode("ADAPTIVE", "Адаптивна освітленість"));
+        defaultModes.add(new Mode("FULL_POWER", "Повна потужність"));
+        defaultModes.add(new Mode("MANUAL", "Ручний режим"));
+        defaultModes.add(new Mode("OFF", "Вимкнути"));
+        defaultModes.add(new Mode("PRESENTATION", "Режим презентації"));
+
+        for (Mode mode : defaultModes) {
+            try {
+                Mode existingMode = this.getModeByName(mode.getName());
+                mode.setId(existingMode.getId());
+            } catch (EntityNotFoundException ex) {
+                System.out.println(ex.getMessage());
+            }
+            this.createOrUpdate(mode);
         }
     }
 }
