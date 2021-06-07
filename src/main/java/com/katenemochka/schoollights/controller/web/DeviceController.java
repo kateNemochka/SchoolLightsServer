@@ -29,6 +29,6 @@ public class DeviceController {
     @GetMapping("/devices/device-types")
     public String getAllDeviceTypes(Model model) {
         model.addAttribute("deviceTypes", deviceTypeService.getAll());
-        return "device-types-list";
+        return "lists/device-types-list";
     }
 }
