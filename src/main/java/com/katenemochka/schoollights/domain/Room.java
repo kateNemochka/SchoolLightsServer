@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 public class Room {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     private String name; //207
     private int floor; //2

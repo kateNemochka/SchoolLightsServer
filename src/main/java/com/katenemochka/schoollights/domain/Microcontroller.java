@@ -12,7 +12,7 @@ import java.util.Date;
 @Getter
 public class Microcontroller {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String ipAddress;
     private String macAddress;

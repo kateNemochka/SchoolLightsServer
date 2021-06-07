@@ -3,6 +3,7 @@ package com.katenemochka.schoollights.domain;
 import com.katenemochka.schoollights.domain.types.Mode;
 import com.katenemochka.schoollights.domain.types.ZoneType;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -12,9 +13,10 @@ import java.util.List;
 @Table(name = "zones")
 @Setter
 @Getter
+@NoArgsConstructor
 public class Zone {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     @JoinColumn(name="room_id", nullable=false)
@@ -32,8 +34,4 @@ public class Zone {
     private Mode mode;
     private int modeTimeout;
     private int dimmerValue;
-
-
-    public Zone() {
-    }
 }
