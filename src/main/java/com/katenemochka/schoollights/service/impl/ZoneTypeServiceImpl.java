@@ -26,7 +26,8 @@ public class ZoneTypeServiceImpl implements ZoneTypeService {
 
     @Override
     public ZoneType getZoneTypeById(Long id) {
-        return zoneTypeRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(("No zone /w id " + id)));
+        return zoneTypeRepository.findById(id).orElseThrow(() ->
+                new EntityNotFoundException(("Zone type with id=" + id + " doesn't exist")));
     }
 
     @Override
@@ -34,11 +35,8 @@ public class ZoneTypeServiceImpl implements ZoneTypeService {
         if (zone.getId() != null) {
 
             Optional<ZoneType> zoneOptional = zoneTypeRepository.findById(zone.getId());
-
             if (zoneOptional.isPresent()) {
-                ZoneType newZoneType = zoneOptional.get();
-                newZoneType.setName(zone.getName());
-                return zoneTypeRepository.save(newZoneType);
+                return zoneTypeRepository.save(zone);
             }
         }
         return zoneTypeRepository.save(zone);
@@ -51,7 +49,7 @@ public class ZoneTypeServiceImpl implements ZoneTypeService {
         if (zoneType.isPresent()) {
             zoneTypeRepository.deleteById(id);
         } else {
-            throw new EntityNotFoundException("There is no zone type with given id");
+            throw new EntityNotFoundException("Can`t delete zone type with id=" + id + " because it doesn't exist");
         }
     }
 }
