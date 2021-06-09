@@ -26,9 +26,5 @@ public class ScheduleController {
         this.periodService = periodService;
     }
 
-    @GetMapping("/schedule/periods")
-    public String getAllDeviceTypes(Model model) {
-        model.addAttribute("periods", periodService.getAll());
-        return "lists/periods-list";
-    }
+
 }

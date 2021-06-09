@@ -1,6 +1,7 @@
 package com.katenemochka.schoollights.controller.web;
 
 import com.katenemochka.schoollights.service.ModeService;
+import com.katenemochka.schoollights.service.PeriodService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,16 +13,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ModeController {
 
     ModeService modeService;
+    PeriodService periodService;
 
     @Autowired
     public void setModeService(ModeService modeService) {
         this.modeService = modeService;
     }
 
-    @GetMapping("/modes")
-    public String getAllDeviceTypes(Model model) {
-        model.addAttribute("modes", modeService.getAll());
-        return "lists/modes-list";
+    @Autowired
+    public void setPeriodService(PeriodService periodService) {
+        this.periodService = periodService;
     }
 
+    @GetMapping("/modes")
+    public String getPredefinedModes(Model model) {
+        model.addAttribute("modes", modeService.getAll());
+        model.addAttribute("periods", periodService.getAll());
+        return "lists/modes-list";
+    }
 }
