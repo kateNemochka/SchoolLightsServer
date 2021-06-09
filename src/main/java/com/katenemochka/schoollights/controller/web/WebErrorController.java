@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 @Controller
 public class WebErrorController implements ErrorController {
@@ -15,18 +18,25 @@ public class WebErrorController implements ErrorController {
     @RequestMapping("/error")
     public String handleError(HttpServletRequest request, Model model) {
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
+        Throwable exception = (Throwable)request.getAttribute(RequestDispatcher.ERROR_EXCEPTION);
+
         if (status != null) {
             int statusCode = Integer.parseInt(status.toString());
-            model.addAttribute("error_code", RequestDispatcher.ERROR_STATUS_CODE);
-            model.addAttribute("error_message", RequestDispatcher.ERROR_MESSAGE);
-            model.addAttribute("error_exception", RequestDispatcher.ERROR_EXCEPTION);
-            model.addAttribute("error_uri", RequestDispatcher.ERROR_REQUEST_URI);
+            model.addAttribute("error_code", statusCode);
+
+            if (exception != null) {
+                String message = exception.getMessage().isEmpty() ? "" : exception.getMessage();
+                String cause = exception.getCause().getMessage();
+                String stackTrace = Arrays.stream(exception.getStackTrace()).limit(5).collect(Collectors.toList()).toString();
+                String uri = request.getAttribute(RequestDispatcher.ERROR_REQUEST_URI).toString();
+                model.addAttribute("error_message", message);
+                model.addAttribute("cause", cause);
+                model.addAttribute("error_stack_trace", stackTrace);
+                model.addAttribute("error_uri", uri);
+            }
 
             if(statusCode == HttpStatus.NOT_FOUND.value()) {
                 return "error-404";
-            }
-            else if(statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
-                return "error-500";
             }
             else return "error";
         }

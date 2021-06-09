@@ -21,24 +21,28 @@
                 <div class="col-lg-8 error-page-divider text-lg-left pl-lg-4">
                   <h2>ЙОЙ!</h2>
                   <h3>Ви натрапили на помилку</h3>
-                  <h4 class="font-weight-light">Internal server error!</h4>
+                  <h4 class="font-weight-light" th:text="${cause}">Internal server error!</h4>
                   <table>
                     <tr>
                       <td>Path</td>
-                      <td th:text="${error_uri}"/>
+                      <td th:text="${error_uri}" th:if="${error_uri}"></td>
                     </tr>
                     <tr>
                       <td>Status</td>
-                      <td th:text="${error_code}"/>
+                      <td th:text="${error_code}" th:if="${error_code}">66</td>
                     </tr>
+                    <!--<tr>
+                      <td>Cause</td>
+                      <td th:text="${cause}" th:if="${cause}"></td>
+                    </tr>-->
                     <tr>
                       <td>Message</td>
-                      <td th:text="${error_message}"/>
+                      <td th:text="${error_message}" th:if="${error_message}"></td>
                     </tr>
-                    <tr>
-                      <td>Exception</td>
-                      <td th:text="${error_exception}"/>
-                    </tr>
+                    <!--<tr>
+                      <td>Stack trace</td>
+                      <td th:text="${error_stack_trace}" th:if="${error_stack_trace}"></td>
+                    </tr>-->
                   </table>
                 </div>
               </div>
