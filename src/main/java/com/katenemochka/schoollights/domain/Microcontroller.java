@@ -17,15 +17,26 @@ public class Microcontroller {
     private String ipAddress;
     private String macAddress;
     private String mqttUsername;
+    private String mqttPassword;
     private Date modeUpdate;
     private Date firmwareUpdate;
-    private int sensorsUpdateTimeout; //інтервал між сповіщеннями про дані датчиків
-    private int statusUpdateTimeout; //інтервал між сповіщеннями про статус контролера
-    @OneToOne(cascade = CascadeType.ALL)
+    private int sensorsUpdateTimeout; //хв - інтервал між сповіщеннями про дані датчиків
+    private int statusUpdateTimeout; //хв - інтервал між сповіщеннями про статус контролера
+    private boolean deviceConnected;
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "room_id", referencedColumnName = "id")
     private Room room;
 
-
     public Microcontroller() {
+        this.sensorsUpdateTimeout = 5;
+        this.statusUpdateTimeout = 120;
+        this.deviceConnected = false;
+    }
+
+    public Microcontroller(String macAddress) {
+        this.macAddress = macAddress;
+        this.sensorsUpdateTimeout = 5;
+        this.statusUpdateTimeout = 120;
+        this.deviceConnected = true;
     }
 }

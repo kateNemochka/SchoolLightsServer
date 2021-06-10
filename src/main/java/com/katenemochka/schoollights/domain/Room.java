@@ -1,10 +1,10 @@
 package com.katenemochka.schoollights.domain;
 
-import com.katenemochka.schoollights.domain.types.Period;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,14 +21,10 @@ public class Room {
     private String description;
     private boolean isInner;
     private int colorTemperature;
-    @ManyToOne
-    @JoinColumn(name="period_id")
-    private Period period;
-    @OneToMany(mappedBy = "room")
-    private List<Zone> zones;
+    @OneToMany(mappedBy = "room", cascade = CascadeType.REMOVE)
+    private List<Zone> zones = new ArrayList<>();
     @OneToOne(mappedBy = "room")
     private Microcontroller microcontroller;
-
 
     public Room() {
     }

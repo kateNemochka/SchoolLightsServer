@@ -7,9 +7,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Optional;
 
 public interface MicrocontrollerRepository extends JpaRepository<Microcontroller, Long> {
-    Microcontroller findByRoom(Room room);
-    Microcontroller findByMacAddress(String macAddress);
+    Optional<Microcontroller> findByRoom(Room room);
+    Optional<Microcontroller> findByMacAddress(String macAddress);
+    Optional<Microcontroller> findByMacAddressAndRoom(String macAddress, Room room);
     Collection<Microcontroller> findAllByModeUpdate(Date modeUpdate);
 }
