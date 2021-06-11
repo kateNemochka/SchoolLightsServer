@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="uk">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Приміщення | БАЛ "Гармонія"</title>
+    <link th:replace="partials/_css-links"/>
+  </head>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:./partials/_navbar.html -->
+      <nav th:replace="partials/_navbar"></nav>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:../../partials/_sidebar.html -->
+        <nav th:replace="partials/_sidebar"></nav>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="row">
+              <div class="col-lg-8 d-flex align-items-stretch grid-margin">
+                <div class="row flex-grow">
+                  <div class="col-12">
+                    <div class="card">
+                      <div class="card-body">
+                        <h4 class="font-weight-semibold">Приміщення</h4>
+                        <p class="card-description text-muted">Базові дані про приміщення</p>
+                        <form class="forms-sample"
+                              th:action="@{/rooms/{action}(action=${operation=='new' ? 'new' : id+'/update'})}"
+                              th:object="${room}" method="post">
+                          <div class="form-group">
+                            <input type="hidden" class="form-control" id="id"
+                                   th:field="*{id}">
+                            <label for="name">Назва/Номер</label>
+                            <input type="text" class="form-control" id="name"
+                                   th:field="*{name}"
+                                   placeholder="000">
+                          </div>
+                          <div class="form-group">
+                            <label for="purpose">Призначення</label>
+                            <input type="text" class="form-control" id="purpose"
+                                   th:field="*{purpose}"
+                                   placeholder="Кабінет ...">
+                          </div>
+                          <div class="form-group">
+                            <label for="description">Деталі</label>
+                            <input type="text" class="form-control" id="description"
+                                   th:field="*{description}"
+                                   placeholder="старша школа">
+                          </div>
+                          <div class="form-group">
+                            <label for="floor">Поверх</label>
+                            <input type="number" class="form-control" id="floor"
+                                   th:field="*{floor}">
+                          </div>
+
+                          <div class="form-check form-check-flat mb-3">
+                            <input class="form-check-input" type="checkbox" id="innerRoom"
+                                   th:field="*{innerRoom}">
+                            <label class="form-check-label" for="innerRoom">
+                              Внутрішнє (не має вікон)
+                            </label>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="microcontroller">Мікроконтролер</label>
+                            <select th:field="*{microcontroller.id}" id="microcontroller" class="form-control">
+                              <option th:each="m : ${microcontrollers}" th:value="${m.id}" th:text="${m.macAddress}">
+                              </option>
+                            </select>
+                          </div>
+
+                          <button type="submit" class="btn btn-success mr-2">Зберегти</button>
+                          <a th:href="@{/rooms{action}(action=${operation=='new' ? '' : '/'+id})}" class="btn btn-light">Скасувати</a>
+                          <a th:href="@{|/rooms/${room.id}/delete|}"
+                             th:if="*{id}"
+                             class="btn btn-danger">Видалити</a>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:../../partials/_footer.html -->
+          <footer th:replace="partials/_footer"></footer>
+          <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <script th:replace="partials/_js-links"></script>
+  </body>
+</html>
