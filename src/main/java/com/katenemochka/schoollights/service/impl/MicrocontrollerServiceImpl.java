@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -29,6 +30,12 @@ public class MicrocontrollerServiceImpl implements MicrocontrollerService {
     }
 
     @Override
+    public List<Microcontroller> getFreeMicrocontrollers() {
+        List<Microcontroller> microcontrollers = microcontrollerRepository.findAllByRoomIsNull();
+        return microcontrollers.isEmpty() ? new ArrayList<>() : microcontrollers;
+    }
+
+    @Override
     public Microcontroller getMicrocontrollerById(Long id) {
         return microcontrollerRepository.findById(id).orElseThrow(() ->
                 new EntityNotFoundException(("No microcontroller with id " + id)));
@@ -41,7 +48,7 @@ public class MicrocontrollerServiceImpl implements MicrocontrollerService {
                     microcontrollerRepository.findById(micro.getId());
             if (microEntity.isPresent()) {
                 Microcontroller newMicro = microEntity.get();
-                newMicro.setMacAddress(micro.getMacAddress());
+                newMicro.setMacAddress(micro.getMacAddress().toUpperCase());
                 newMicro.setIpAddress(micro.getIpAddress());
                 newMicro.setMqttUsername(micro.getMqttUsername());
                 newMicro.setSensorsUpdateTimeout(micro.getSensorsUpdateTimeout());

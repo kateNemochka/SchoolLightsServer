@@ -43,7 +43,7 @@
                           <td th:text="${iStat.index + 1}">0</td>
                           <td th:text="${micro.macAddress}" class="font-weight-medium">Датчик руху біля вікна</td>
                           <td th:text="${micro.ipAddress}">Датчик руху</td>
-                          <td th:text="${micro.room}">207</td>
+                          <td th:text="${micro.room == null ? '-' : micro.room.name}">207</td>
                           <td><span th:text="${micro.deviceConnected ? 'підключено' : 'не підключено'}"
                                     th:class="${micro.deviceConnected ? 'badge badge-online' : 'badge badge-offline'}">
                             Теоретична зона</span></td>
