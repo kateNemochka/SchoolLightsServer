@@ -26,20 +26,28 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
+    public List<Room> getRoomsByFloor(int floor) {
+        List<Room> rooms = roomRepository.findAllByFloor(floor);
+        return rooms.isEmpty() ? new ArrayList<>() : rooms;
+    }
+
+    @Override
     public Room getRoomById(Long id) {
-        return roomRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(("No room /w id " + id)));
+        return roomRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(("No room with id " + id)));
     }
 
     @Override
     public Room createOrUpdate(Room room) {
         if (room.getId() != null) {
-
             Optional<Room> roomOptional = roomRepository.findById(room.getId());
-
             if (roomOptional.isPresent()) {
                 Room newRoom = roomOptional.get();
-                //TODO
-                //newRoom.setName(room.getName());
+                newRoom.setName(room.getName());
+                newRoom.setPurpose(room.getPurpose());
+                newRoom.setDescription(room.getDescription());
+                newRoom.setColorTemperature(room.getColorTemperature());
+                newRoom.setFloor(room.getFloor());
+                newRoom.setInnerRoom(room.isInnerRoom());
                 return roomRepository.save(newRoom);
             }
         }
@@ -48,10 +56,33 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public void deleteRoomById(Long id) {
-        Optional<Room> role = roomRepository.findById(id);
-
-        if (role.isPresent()) {
+        Optional<Room> room = roomRepository.findById(id);
+        if (room.isPresent()) {
             roomRepository.deleteById(id);
+        } else {
+            throw new EntityNotFoundException("There is no room type with given id");
+        }
+    }
+
+    @Override
+    public void updateColorTemperature(Room room, int colorTemperature) {
+        if (room.getId() != null) {
+            Optional<Room> roomOptional = roomRepository.findById(room.getId());
+            if (roomOptional.isPresent()) {
+                Room newRoom = roomOptional.get();
+                newRoom.setColorTemperature(room.getColorTemperature());
+                roomRepository.save(newRoom);
+            }
+        }
+    }
+
+    @Override
+    public void updateColorTemperature(Long roomId, int colorTemperature) {
+        Optional<Room> roomOptional = roomRepository.findById(roomId);
+        if (roomOptional.isPresent()) {
+            Room room = roomOptional.get();
+            room.setColorTemperature(colorTemperature);
+            roomRepository.save(room);
         } else {
             throw new EntityNotFoundException("There is no room type with given id");
         }

@@ -2,6 +2,7 @@ package com.katenemochka.schoollights.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.util.Date;
 @Table(name = "microcontrollers")
 @Setter
 @Getter
+@ToString
 public class Microcontroller {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -31,13 +31,13 @@ public class MicroController {
     }
 
     @GetMapping("/microcontrollers/createUpdate")
-    public String newMicrocontroller(Model model) {
+    public String createOrUpdateMicrocontroller(Model model) {
         model.addAttribute("microcontroller", new Microcontroller());
         return "forms/microcontroller-form";
     }
 
     @PostMapping("/microcontrollers/createUpdate")
-    public String createOrUpdateMicrocontroller(@ModelAttribute("microcontroller") Microcontroller microcontroller,
+    public String saveMicrocontroller(@ModelAttribute("microcontroller") Microcontroller microcontroller,
                                          BindingResult result) {
         if (result.hasErrors()) {
             return "forms/microcontroller-form";
@@ -59,5 +59,4 @@ public class MicroController {
         microcontrollerService.deleteMicrocontrollerById(id);
         return "redirect:/microcontrollers";
     }
-
 }

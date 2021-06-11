@@ -19,13 +19,14 @@ public class Room {
     private int floor; //2
     private String purpose; //Кабінет інформатики
     private String description;
-    private boolean isInner;
-    private int colorTemperature;
+    private boolean innerRoom;
+    private int colorTemperature; //K
     @OneToMany(mappedBy = "room", cascade = CascadeType.REMOVE)
     private List<Zone> zones = new ArrayList<>();
     @OneToOne(mappedBy = "room")
     private Microcontroller microcontroller;
 
     public Room() {
+        colorTemperature = 3000;
     }
 }

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="uk">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Приміщення | БАЛ "Гармонія"</title>
+    <link th:replace="partials/_css-links"/>
+  </head>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:../../partials/_navbar.html -->
+      <div th:replace="partials/_navbar"></div>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:../../partials/_sidebar.html -->
+        <div th:replace="partials/_sidebar"></div>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="row">
+              <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h2 class="font-weight-semibold">Приміщення</h2>
+                    <p class="card-description text-muted">Список приміщень БАЛ "Гармонія"</p>
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>№</th>
+                          <th>Назва</th>
+                          <th>Призначення</th>
+                          <th>Поверх</th>
+                          <th>Внутрішня</th>
+                          <th>Контролер</th>
+                          <th>Деталі</th>
+                          <th><a class="btn btn-rounded btn-primary" href="/rooms/new">Нове</a></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr th:each="room, iStat: ${rooms}">
+                          <td th:text="${iStat.index + 1}"></td>
+                          <td th:text="${room.name}" class="font-weight-medium"></td>
+                          <td th:text="${room.purpose}"></td>
+                          <td th:text="${room.floor}"></td>
+                          <td th:text="${room.innerRoom ? 'Так' : 'Ні'}"></td>
+                          <td><span th:text="${room.microcontroller != null ? 'підключено' : 'не підключено'}"
+                                    th:class="${room.microcontroller != null ? 'badge badge-success' : 'badge badge-offline'}">
+                            Теоретична зона</span></td>
+                          <td th:text="${room.description}"></td>
+                          <td><a type="button" class="btn btn-light"
+                                 th:href="@{/rooms/{room_id}(room_id=${room.id})}">
+                            Детальніше</a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:../../partials/_footer.html -->
+          <footer th:replace="partials/_footer"></footer>
+          <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <script th:replace="partials/_js-links"></script>
+  </body>
+</html>
