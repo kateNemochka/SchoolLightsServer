@@ -21,6 +21,7 @@
             <div class="row">
               <div class="col-12 grid-margin">
                 <div class="card">
+                  <!--Загальні дані про приміщення-->
                   <div class="row">
                     <div  class="col-md-7">
                       <div class="card-body pb-1">
@@ -43,70 +44,90 @@
                                            ? room.microcontroller.macAddress
                                            : 'не підключено'}"
                                 class="font-weight-normal"></span></h6>
+                        <h6 class="font-weight-lighter">Статус:
+                          <span th:if="${room.microcontroller != null}"
+                                th:text="${room.microcontroller.deviceConnected ? 'підключено' : 'не підключено'}"
+                                th:class="${room.microcontroller.deviceConnected
+                                            ? 'badge badge-success'
+                                            : 'badge badge-offline'}"></span></h6>
                       </div>
                     </div>
                     <div  class="col-md-12">
                       <div class="card-body pt-3 pb-4">
-                        <a type="button" class="btn btn-primary btn-lg btn-rounded"
+                        <a type="button" class="btn btn-primary btn-rounded mb-2"
                            th:href="@{/rooms/{room_id}/update(room_id=${room.id})}">
-                          Змінити дані</a>
+                          Редагувати дані про приміщення</a>
+                        <a type="button" class="btn btn-secondary btn-rounded mb-2"
+                           th:if="${room.microcontroller != null && room.microcontroller.deviceConnected}">
+                          Оновити дані на пристрої</a>
+                        <a type="button" class="btn btn-inverse-danger btn-rounded mb-2">
+                          Видалити приміщення</a>
                       </div>
                     </div>
                   </div>
 
-                  <!--Зона теоретичних занять-->
+                  <!--Зони приміщення-->
+                  <div class="row" th:object="${zone}" th:each="zone : ${room.zones}">
+                    <div class="col-md-12">
+                      <div class="card-body">
+                        <h4 class="font-weight-medium" th:text="${zone.name}">Зона теоретичних занять</h4>
+                        <div class="row">
+                          <div class="col-md-4 mb-3">
+                            <h5 class="font-weight-normal" th:text="${zone.zoneType.name}">Навчальна зона</h5>
+                            <label for="motion-sensor">Датчик руху</label>
+                            <button type="button" class="btn btn-icons btn-light btn-rounded" id="motion-sensor">
+                              <i class="mdi mdi-database"></i></button>
+                            <p class="text-muted" >Опис датчика</p>
+                            <a type="button" class="btn btn-secondary btn-rounded mb-2">
+                              Редагувати дані про зону</a>
+                            <a type="button" class="btn btn-inverse-danger btn-rounded mb-2">
+                              Видалити зону</a>
+                          </div>
+                          <div class="col-md-8 table-responsive">
+                            <h5 class="font-weight-light">Ряди світильників</h5>
+                            <table class="table">
+                              <thead>
+                              <tr>
+                                <th>Ряд</th>
+                                <th>Датчик освітленості</th>
+                                <th>Димер</th>
+                                <th>Світильники</th>
+                                <th><button type="button" class="btn btn-icons btn-light btn-rounded">
+                                  <i class="mdi mdi-plus"></i></button></th>
+                              </tr>
+                              </thead>
+                              <tbody th:object="row" th:each="row : ${zone.rows}">
+                              <tr>
+                                <td th:text="${row.rowNumberFromWindow}">1</td>
+                                <td><button type="button" class="btn btn-icons btn-light btn-rounded">
+                                  <i class="mdi mdi-database"></i></button>
+                                  <label class="text-muted small-text">Опис датчика</label></td>
+                                <td><button type="button" class="btn btn-icons btn-light btn-rounded">
+                                  <i class="mdi mdi-database"></i></button>
+                                  <label class="text-muted small-text">Опис датчика</label></td>
+                                <td><button type="button" class="btn btn-icons btn-light btn-rounded">
+                                  <i class="mdi mdi-database"></i></button>
+                                  <label class="text-muted small-text">Опис датчика</label></td>
+                                <td><button type="button" class="btn btn-icons btn-inverse-danger btn-rounded">
+                                  <i class="mdi mdi-trash-can"></i></button></td>
+                              </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--Кнопка для додавання зон-->
                   <div class="row">
                     <div class="col-md-12">
                       <div class="card-body">
-                        <h3 class="font-weight-medium">Зона теоретичних занять</h3>
-                        <div class="row">
-                          <div class="col-md-5">
-                            <h4 class="font-weight-light">Режими</h4>
-                              <div class="template-demo">
-                              <button type="button" class="btn btn-primary btn-rounded">Автоматичний</button>
-                              <button type="button" class="btn btn-secondary btn-rounded">Адаптивний</button>
-                              <button type="button" class="btn btn-secondary btn-rounded">Презентація</button>
-                              <br>
-                              <button type="button" class="btn btn-secondary btn-rounded">Максимальна потужність</button>
-                              <button type="button" class="btn btn-secondary btn-rounded">Власні налаштування</button>
-                              <br>
-                              <button type="button" class="btn btn-light btn-rounded">Вимкнути</button>
-                            </div>
-                          </div>
-                          <div class="col-md-7">
-                            <h4 class="font-weight-light">Ряди світильників</h4>
-                              <table class="table">
-                                <thead>
-                                  <th>Ряд</th>
-                                  <th>Потужність</th>
-                                  <th>Стан</th>
-                                  <th></th>
-                                </thead>
-                                <tbody>
-                                  <tr class="table-secondary">
-                                    <td>1</td>
-                                    <td>0%</td>
-                                    <td><label class="badge badge-muted">Off</label></td>
-                                    <td>
-                                      <button class="btn btn-light btn-rounded">Увімкнути</button>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>2</td>
-                                    <td>20%</td>
-                                    <td><label class="badge badge-success text-white">On</label></td>
-                                    <td><button class="btn btn-light btn-rounded">Вимкнути</button></td>
-                                  </tr>
-                                  <tr>
-                                    <td>3</td>
-                                    <td>25%</td>
-                                    <td><label class="badge badge-success text-white">On</label></td>
-                                    <td><button class="btn btn-light btn-rounded">Вимкнути</button></td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                          </div>
-                        </div>
+                        <a type="button" class="btn btn-inverse-primary btn-rounded"
+                           th:href="@{/rooms/{room_id}/update(room_id=${room.id})}">
+                            Додати нову зону</a>
+                        <a data-toggle="modal" data-target="#modal-warning"
+                           th:attr="data-target='#modal-warning'+${room.id}">
+                          <span class="glyphicon glyphicon-trash"></span></a>
                       </div>
                     </div>
                   </div>
