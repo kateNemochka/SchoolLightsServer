@@ -28,22 +28,20 @@
                       <thead>
                         <tr>
                           <th>№</th>
-                          <th>Назва</th>
-                          <th>Тип</th>
-                          <th>Кабінет</th>
+                          <th>Пристрій</th>
+                          <th>Приміщення</th>
                           <th>Зона</th>
-                          <th>Ряд світильників</th>
+                          <th>Ряд</th>
                           <th></th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr th:each="device, iStat: ${devices}">
                           <td th:text="${iStat.index + 1}">0</td>
-                          <td th:text="${device.deviceName}" class="font-weight-medium">Датчик руху біля вікна</td>
-                          <td th:text="${device.deviceType}">Датчик руху</td>
-                          <td th:text="${device.room}">207</td>
-                          <td th:text="${device.zone}">Теоретична зона</td>
-                          <td th:text="${device.row}">1</td>
+                          <td th:text="${device.deviceType.displayName}" class="font-weight-medium">Датчик руху біля вікна</td>
+                          <td th:text="${device.zone.room.name}">207</td>
+                          <td th:text="${device.zone.name}">Теоретична зона</td>
+                          <td th:text="${device.row != null ? device.row.rowNumberFromWindow : ''}">1</td>
                           <td><a type="button" class="btn btn-light"
                                     th:href="@{/devices/{device_id}(device_id=${device.id})}">Детальніше</a></td>
                         </tr>

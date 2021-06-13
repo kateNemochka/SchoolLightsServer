@@ -21,7 +21,7 @@ public class Room {
     private String description;
     private boolean innerRoom;
     private int colorTemperature; //K
-    @OneToMany(mappedBy = "room", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Zone> zones = new ArrayList<>();
     @OneToOne(mappedBy = "room")
     private Microcontroller microcontroller;

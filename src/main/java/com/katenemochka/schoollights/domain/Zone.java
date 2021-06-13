@@ -1,12 +1,14 @@
 package com.katenemochka.schoollights.domain;
 
-import com.katenemochka.schoollights.domain.types.Mode;
+import com.katenemochka.schoollights.domain.types.ModeTimestamp;
 import com.katenemochka.schoollights.domain.types.ZoneType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -18,20 +20,22 @@ public class Zone {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    @JoinColumn(name="room_id", nullable=false)
-    private Room room;
     private String name;
     @ManyToOne
-    @JoinColumn(name="zone_type_id")
-    private ZoneType zoneType;
-    @OneToMany(mappedBy = "zone")
-    private List<Device> deviceList;
-    @OneToMany(mappedBy = "zone")
-    private List<Row> rowList;
+    @JoinColumn(name="room_id", nullable=true)
+    private Room room;
     @ManyToOne
-    @JoinColumn(name="mode_id")
-    private Mode mode;
-    private int modeTimeout;
-    private int dimmerValue;
+    @JoinColumn(name="zone_type_id", nullable = true)
+    private ZoneType zoneType;
+
+    @OneToMany(mappedBy = "zone", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Device> devices = new ArrayList<>();
+    @OneToMany(mappedBy = "zone", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Row> rows = new ArrayList<>();
+    @OneToMany(mappedBy = "zone", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ModeTimestamp> modesData = new ArrayList<>();
+
+    public Zone(Room room) {
+        this.room = room;
+    }
 }

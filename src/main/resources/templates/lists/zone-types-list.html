@@ -23,8 +23,8 @@
                 <div class="card">
                   <div class="card-body table-responsive">
 
-                    <h2 class="font-weight-semibold">Зони навчальних класів</h2>
-                    <p class="card-description text-muted">Типи зон, на які поділяються навчальні класи</p>
+                    <h2 class="font-weight-semibold">Типи зон</h2>
+                    <p class="card-description text-muted">Для налаштування норм рівнів освітленості та часових проміжків</p>
                     <table class="table table-hover">
                       <thead>
                         <tr>
@@ -42,10 +42,10 @@
                           <td th:text="${zoneType.name}" class="font-weight-medium"></td>
                           <td th:text="${zoneType.lightMinimum}"></td>
                           <td th:text="${zoneType.lightMaximum}"></td>
-                          <td th:text="${zoneType.description}"></td>
-                          <td><a type="button" class="btn btn-light"
+                          <td th:text="${zoneType.description}" class="font-weight-lighter"></td>
+                          <td><a type="button" class="btn btn-icons btn-inverse-light btn-rounded"
                                  th:href="@{/zones/zone-types/{zone_type_id}(zone_type_id=${zoneType.id})}">
-                            Детальніше</a>
+                            <i class="mdi mdi-pencil"></i></a>
                           </td>
                         </tr>
                       </tbody>

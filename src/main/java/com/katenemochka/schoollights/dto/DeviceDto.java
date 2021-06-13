@@ -6,7 +6,6 @@ import lombok.Data;
 @Data
 public class DeviceDto {
     private Long id;
-    private String deviceName;
     private String deviceType;
     private String room;
     private String zone;
@@ -15,7 +14,6 @@ public class DeviceDto {
 
     public DeviceDto(Device device) {
         this.id = device.getId();
-        this.deviceName = device.getDeviceName();
         this.deviceType = device.getDeviceType().getDisplayName();
         this.room = device.getZone().getRoom().getName();
         this.zone = device.getZone().getName();

@@ -22,8 +22,6 @@ public class Period implements Comparable<Period> {
     private String name;
     private String displayName;
     @OneToMany(mappedBy = "period")
-    List<Room> rooms;
-    @OneToMany(mappedBy = "period")
     List<Schedule> scheduleEntries;
 
     public Period() {

@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>БАЛ "Гармонія"</title>
+    <title>Приміщення | БАЛ "Гармонія"</title>
     <link th:replace="partials/_css-links"/>
   </head>
   <body>
@@ -24,25 +24,36 @@
                   <div class="col-12">
                     <div class="card">
                       <div class="card-body">
-                        <h4 class="font-weight-semibold" th:text="${device.deviceType.displayName}">Пристрій</h4>
-                        <p class="card-description text-muted"
-                           th:text="${'Каб. ' + device.zone.room.name + ', ' + device.zone.name
-                                      + (device.row != null ? ', ряд: ' + device.row.rowNumberFromWindow : '')}">
-                          Кінцевий пристрій</p>
+                        <h4 class="font-weight-semibold">Зона приміщення</h4>
+                        <p class="card-description text-muted">Дані про зону та її датчики</p>
                         <form class="forms-sample"
-                              th:action="@{/devices/${device.id}}"
-                              th:object="${device}" method="post">
+                              th:action="@{/rooms/{roomId}/zones/{action}(roomId=*{room.id},action=${operation=='new' ? 'new' : id})}"
+                              th:object="${zone}" method="post">
                           <div class="form-group">
                             <input type="hidden" class="form-control" id="id"
                                    th:field="*{id}">
-                            <label for="description">Опис</label>
-                            <input type="text" class="form-control" id="description"
-                                   th:field="*{description}"
-                                   placeholder="">
+                            <input type="hidden" class="form-control" id="room_id"
+                                   th:field="*{room}">
+
+                            <label for="name">Назва</label>
+                            <input type="text" class="form-control" id="name"
+                                   th:field="*{name}"
+                                   placeholder="000">
+                          </div>
+
+                          <div class="form-group">
+                            <label for="zone-type">Тип зони</label>
+                            <select th:field="*{zoneType.id}" id="zone-type" class="form-control">
+                              <option th:each="z : ${zone_types}" th:value="${z.id}" th:text="${z.name}">
+                              </option>
+                            </select>
                           </div>
 
                           <button type="submit" class="btn btn-success mr-2">Зберегти</button>
-                          <a th:href="@{/devices}" class="btn btn-light">Скасувати</a>
+                          <a th:href="@{/rooms/{roomId}(roomId=*{room.id})}" class="btn btn-light">Скасувати</a>
+                          <a th:href="@{/rooms/{roomId}/zones/{zoneId}/delete(roomId=*{room.id},zoneId=${zone.id})}"
+                             th:if="*{id}"
+                             class="btn btn-danger">Видалити</a>
                         </form>
                       </div>
                     </div>

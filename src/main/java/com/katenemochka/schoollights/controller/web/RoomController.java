@@ -57,7 +57,7 @@ public class RoomController {
 
     @PostMapping({"/rooms/new", "/rooms/{id}/update"})
     public String saveNewRoom(@ModelAttribute("room") Room room,
-                              @PathVariable Long id,
+                              @PathVariable(value = "id", required = false) Long id,
                               BindingResult result) {
         if (result.hasErrors())
             return "forms/room-form";

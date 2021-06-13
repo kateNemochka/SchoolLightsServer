@@ -23,6 +23,7 @@
                 <div class="card">
                   <!--Загальні дані про приміщення-->
                   <div class="row">
+                    <!--Ліва половина - основні дані-->
                     <div  class="col-md-7">
                       <div class="card-body pb-1">
                         <h2 class="font-weight-semibold"
@@ -33,6 +34,7 @@
                             th:text="${room.floor + ' поверх'}">2 поверх</h5>
                       </div>
                     </div>
+                    <!--Додаткові дані-->
                     <div  class="col-md-5">
                       <div class="card-body pb-2 pt-1 pt-md-5">
                         <h6 class="font-weight-lighter">Деталі:
@@ -44,86 +46,64 @@
                                            ? room.microcontroller.macAddress
                                            : 'не підключено'}"
                                 class="font-weight-normal"></span></h6>
-                        <h6 class="font-weight-lighter">Статус:
-                          <span th:if="${room.microcontroller != null}"
-                                th:text="${room.microcontroller.deviceConnected ? 'підключено' : 'не підключено'}"
+                        <h6 class="font-weight-lighter" th:if="${room.microcontroller != null}">Статус:
+                          <span th:text="${room.microcontroller.deviceConnected ? 'підключено' : 'не підключено'}"
                                 th:class="${room.microcontroller.deviceConnected
                                             ? 'badge badge-success'
                                             : 'badge badge-offline'}"></span></h6>
                       </div>
                     </div>
+                    <!--Кнопки для роботи з даними приміщення-->
                     <div  class="col-md-12">
                       <div class="card-body pt-3 pb-4">
                         <a type="button" class="btn btn-primary btn-rounded mb-2"
                            th:href="@{/rooms/{room_id}/update(room_id=${room.id})}">
                           Редагувати дані про приміщення</a>
                         <a type="button" class="btn btn-secondary btn-rounded mb-2"
+                           th:href="@{/rooms/{room_id}/update(room_id=${room.id})}"
                            th:if="${room.microcontroller != null && room.microcontroller.deviceConnected}">
                           Оновити дані на пристрої</a>
-                        <a type="button" class="btn btn-inverse-danger btn-rounded mb-2">
+                        <a type="button" class="btn btn-inverse-danger btn-rounded mb-2"
+                           th:href="@{/rooms/{room_id}/delete(room_id=${room.id})}">
                           Видалити приміщення</a>
                       </div>
                     </div>
                   </div>
 
                   <!--Зони приміщення-->
-                  <div class="row" th:object="${zone}" th:each="zone : ${room.zones}">
-                    <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-4 mb-3" th:object="${zone}" th:each="zone : ${room.zones}">
                       <div class="card-body">
+                        <!--Назва-->
                         <h4 class="font-weight-medium" th:text="${zone.name}">Зона теоретичних занять</h4>
-                        <div class="row">
-                          <div class="col-md-4 mb-3">
-                            <h5 class="font-weight-normal" th:text="${zone.zoneType.name}">Навчальна зона</h5>
-                            <label for="motion-sensor">Датчик руху</label>
-                            <button type="button" class="btn btn-icons btn-light btn-rounded" id="motion-sensor">
-                              <i class="mdi mdi-database"></i></button>
-                            <p class="text-muted" >Опис датчика</p>
-                            <a type="button" class="btn btn-secondary btn-rounded mb-2">
-                              Редагувати дані про зону</a>
-                            <a type="button" class="btn btn-inverse-danger btn-rounded mb-2">
-                              Видалити зону</a>
-                          </div>
-                          <div class="col-md-8 table-responsive">
-                            <h5 class="font-weight-light">Ряди світильників</h5>
-                            <table class="table">
-                              <thead>
-                              <tr>
-                                <th>Ряд</th>
-                                <th>Датчик освітленості</th>
-                                <th>Димер</th>
-                                <th>Світильники</th>
-                                <th><button type="button" class="btn btn-icons btn-light btn-rounded">
-                                  <i class="mdi mdi-plus"></i></button></th>
-                              </tr>
-                              </thead>
-                              <tbody th:object="row" th:each="row : ${zone.rows}">
-                              <tr>
-                                <td th:text="${row.rowNumberFromWindow}">1</td>
-                                <td><button type="button" class="btn btn-icons btn-light btn-rounded">
-                                  <i class="mdi mdi-database"></i></button>
-                                  <label class="text-muted small-text">Опис датчика</label></td>
-                                <td><button type="button" class="btn btn-icons btn-light btn-rounded">
-                                  <i class="mdi mdi-database"></i></button>
-                                  <label class="text-muted small-text">Опис датчика</label></td>
-                                <td><button type="button" class="btn btn-icons btn-light btn-rounded">
-                                  <i class="mdi mdi-database"></i></button>
-                                  <label class="text-muted small-text">Опис датчика</label></td>
-                                <td><button type="button" class="btn btn-icons btn-inverse-danger btn-rounded">
-                                  <i class="mdi mdi-trash-can"></i></button></td>
-                              </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
+                        <h5 class="font-weight-lighter">Тип:
+                          <span th:text="${zone.zoneType.name}"
+                                class="font-weight-normal"></span></h5>
+                        <a type="button" class="btn btn-secondary btn-rounded mb-2"
+                           th:href="@{/rooms/{roomId}/zones/{zoneId}(roomId=${room.id},zoneId=${zone.id})}">
+                          Редагувати дані про зону</a>
+                        <a type="button" class="btn btn-inverse-danger btn-rounded mb-2"
+                           th:href="@{/rooms/{roomId}/zones/{zoneId}/delete(roomId=${room.id},zoneId=${zone.id})}">
+                          Видалити зону</a>
+                        <h5 class="font-weight-lighter">Кількість рядів світильників:
+                          <span th:text="${zone.rows.size()}"
+                                class="font-weight-normal"></span></h5>
+                        <a type="button" class="btn btn-inverse-secondary btn-rounded mb-2"
+                           th:href="@{/rooms/{roomId}/zones/{zoneId}/rows/add(roomId=${room.id},zoneId=${zone.id})}">
+                          Додати ряд</a>
+                        <a type="button" class="btn btn-inverse-danger btn-rounded mb-2"
+                           th:href="@{/rooms/{roomId}/zones/{zoneId}/rows/remove(roomId=${room.id},zoneId=${zone.id})}"
+                           th:if="${zone.rows.size() > 1}">
+                          Видалити ряд</a>
                       </div>
                     </div>
                   </div>
-                  <!--Кнопка для додавання зон-->
+                  <!--Кнопка для додавання нових зон-->
                   <div class="row">
                     <div class="col-md-12">
                       <div class="card-body">
                         <a type="button" class="btn btn-inverse-primary btn-rounded"
-                           th:href="@{/rooms/{room_id}/update(room_id=${room.id})}">
+                           th:href="@{/rooms/{roomId}/zones/new(roomId=${room.id})}">
                             Додати нову зону</a>
                         <a data-toggle="modal" data-target="#modal-warning"
                            th:attr="data-target='#modal-warning'+${room.id}">
@@ -148,3 +128,40 @@
     <script th:replace="partials/_js-links"></script>
   </body>
 </html>
+
+<!--Ряди світильників-->
+<!--<div class="col-md-8 table-responsive">
+  <h5 class="font-weight-normal">Пристрої</h5>
+  <label class="small" for="motion-sensor">Датчик руху</label>
+  <a type="button" class="btn btn-icons btn-light btn-rounded" id="motion-sensor">
+    <i class="mdi mdi-database"></i></a>
+  <table class="table table-sm">
+    <thead>
+    <tr class="pt-0">
+      <th>Ряд</th>
+      <th>Датчик освітленості</th>
+      <th>Димер</th>
+      <th>Світильники</th>-->
+<!--Додавання рядів світильників--
+<th class="pt-0 pb-0"><a type="button" class="btn btn-icons btn-light btn-rounded"
+       th:href="@{/rooms/{roomId}/zones/{zoneId}/rows/new(roomId=${room.id},zoneId=${zone.id})}">
+  <i class="mdi mdi-plus"></i></a></th>
+</tr>
+</thead>
+<tbody>
+<tr th:each="row : ${zone.rows}">
+<td th:text="${row.rowNumberFromWindow}">1</td>
+<td><button type="button" class="btn btn-icons btn-light btn-rounded">
+  <i class="mdi mdi-database"></i></button>
+<td><button type="button" class="btn btn-icons btn-light btn-rounded">
+  <i class="mdi mdi-database"></i></button>
+<td><button type="button" class="btn btn-icons btn-light btn-rounded">
+  <i class="mdi mdi-database"></i></button>-->
+<!--Видалення рядів світильників--
+<td><button type="button" class="btn btn-icons btn-inverse-danger btn-rounded"
+            th:if="${zone.rows.size() == row.rowNumberFromWindow && row.rowNumberFromWindow != 1}">
+  <i class="mdi mdi-trash-can"></i></button></td>
+</tr>
+</tbody>
+</table>
+</div>-->

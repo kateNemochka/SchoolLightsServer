@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /*Спосіб керування освітленням*/
@@ -21,7 +22,7 @@ public class Mode {
     private String name;
     private String displayName;
     @OneToMany(mappedBy = "mode")
-    List<Zone> zones;
+    List<ModeTimestamp> zoneModesTimestamps = new ArrayList<>();
 
     public Mode(String name, String displayName) {
         this.name = name;

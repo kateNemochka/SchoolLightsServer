@@ -33,7 +33,6 @@ public class ZoneTypeServiceImpl implements ZoneTypeService {
     @Override
     public ZoneType createOrUpdate(ZoneType zone) {
         if (zone.getId() != null) {
-
             Optional<ZoneType> zoneOptional = zoneTypeRepository.findById(zone.getId());
             if (zoneOptional.isPresent()) {
                 return zoneTypeRepository.save(zone);

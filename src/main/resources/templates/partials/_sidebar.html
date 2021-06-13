@@ -38,14 +38,15 @@
       <div class="collapse" id="rooms-menu">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item">
-            <a class="nav-link" href="/rooms">Приміщення</a>
+            <a class="nav-link" href="/rooms">Список приміщень</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./pages/ui-features/dropdowns.html">Зони</a>
+            <a class="nav-link" th:href="@{/zones}">Зони</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" th:href="@{/zones/zone-types}">Типи зон</a>
           </li>
+
         </ul>
       </div>
     </li>
@@ -62,7 +63,10 @@
             <a class="nav-link" th:href="@{/microcontrollers}">Мікроконтролери</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" th:href="@{/devices}">Пристрої</a>
+            <a class="nav-link" th:href="@{/devices}">Кінцеві пристрої</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/devices/device-types}">Типи пристроїв</a>
           </li>
         </ul>
       </div>
@@ -84,21 +88,10 @@
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" data-toggle="collapse" href="#predefined-menu" aria-expanded="false" aria-controls="ui-basic">
+      <a class="nav-link" th:href="@{/modes}" >
         <i class="menu-icon typcn typcn-coffee"></i>
-        <span class="menu-title">Незмінні дані</span>
-        <i class="menu-arrow"></i>
+        <span class="menu-title">Режими та періоди роботи</span>
       </a>
-      <div class="collapse" id="predefined-menu">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item">
-            <a class="nav-link" th:href="@{/modes}">Режими та періоди роботи</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" th:href="@{/devices/device-types}">Типи пристроїв</a>
-          </li>
-        </ul>
-      </div>
     </li>
 
   </ul>

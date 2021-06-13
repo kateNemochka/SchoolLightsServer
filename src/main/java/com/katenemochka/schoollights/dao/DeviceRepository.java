@@ -8,9 +8,12 @@ import com.katenemochka.schoollights.domain.types.DeviceType;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;
+import java.util.List;
 
 public interface DeviceRepository extends JpaRepository<Device, Long> {
-    Collection<Device> findAllByDeviceType(DeviceType deviceType);
-    Collection<Device> findAllByZone(Zone zone);
-    Collection<Device> findAllByZoneAndRow(Zone zone, Row row);
+    List<Device> findAllByDeviceType(DeviceType deviceType);
+    List<Device> findAllByZone(Zone zone);
+    List<Device> findAllByRow(Row row);
+    List<Device> findAllByDeviceTypeAndZone(DeviceType deviceType, Zone zone);
+    List<Device> findAllByDeviceTypeAndRow(DeviceType deviceType, Row row);
 }

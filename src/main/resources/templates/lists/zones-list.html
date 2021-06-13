@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Приміщення | БАЛ "Гармонія"</title>
+    <title>Зони | БАЛ "Гармонія"</title>
     <link th:replace="partials/_css-links"/>
   </head>
   <body>
@@ -22,36 +22,29 @@
               <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h2 class="font-weight-semibold">Приміщення</h2>
-                    <p class="card-description text-muted">Список приміщень БАЛ "Гармонія"</p>
+                    <h2 class="font-weight-semibold">Зони</h2>
+                    <p class="card-description text-muted">Усі створені зони</p>
                     <table class="table table-hover">
                       <thead>
                         <tr>
                           <th>№</th>
                           <th>Назва</th>
-                          <th>Призначення</th>
-                          <th>Поверх</th>
-                          <th>Внутрішня</th>
-                          <th>Контролер</th>
-                          <th>Деталі</th>
-                          <th><a class="btn btn-rounded btn-primary" href="/rooms/new">Нове</a></th>
+                          <th>Тип</th>
+                          <th>Приміщення</th>
+                          <th>К-ть рядів</th>
+                          <th></th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr th:each="room, iStat: ${rooms}">
-                          <td th:text="${iStat.index + 1}"></td>
-                          <td th:text="${room.name}" class="font-weight-medium"></td>
-                          <td th:text="${room.purpose}"></td>
-                          <td th:text="${room.floor}"></td>
-                          <td th:text="${room.innerRoom ? 'Так' : 'Ні'}"></td>
-                          <td><span th:text="${room.microcontroller != null ? 'підключено' : 'не підключено'}"
-                                    th:class="${room.microcontroller != null ? 'badge badge-success' : 'badge badge-offline'}">
-                            Теоретична зона</span></td>
-                          <td th:text="${room.description}"></td>
-                          <td><a type="button" class="btn btn-icons btn-inverse-light btn-rounded"
-                               th:href="@{/rooms/{room_id}(room_id=${room.id})}">
-                              <i class="mdi mdi-information-outline"></i></a>
-                          </td>
+                        <tr th:each="zone, iStat: ${zones}">
+                          <td th:text="${iStat.index + 1}">0</td>
+                          <td th:text="${zone.name}" class="font-weight-medium">Датчик руху біля вікна</td>
+                          <td th:text="${zone.zoneType.name}">Датчик руху</td>
+                          <td th:text="${zone.room.name}">207</td>
+                          <td th:text="${zone.rows.size()}">Теоретична зона</td>
+                          <td><a type="button" class="btn btn-light"
+                                    th:href="@{/rooms/{roomId}/zones/{zoneId}
+                                              (zoneId=${zone.id},roomId=${zone.room.id})}">Детальніше</a></td>
                         </tr>
                       </tbody>
                     </table>

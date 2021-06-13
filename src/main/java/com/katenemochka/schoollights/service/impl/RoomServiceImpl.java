@@ -3,7 +3,9 @@ package com.katenemochka.schoollights.service.impl;
 
 import com.katenemochka.schoollights.dao.RoomRepository;
 import com.katenemochka.schoollights.domain.Room;
+import com.katenemochka.schoollights.domain.Zone;
 import com.katenemochka.schoollights.service.RoomService;
+import com.katenemochka.schoollights.service.ZoneService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,8 @@ import java.util.Optional;
 public class RoomServiceImpl implements RoomService {
     @Autowired
     RoomRepository roomRepository;
+    @Autowired
+    ZoneService zoneService;
 
     @Override
     public List<Room> getAll() {
@@ -51,7 +55,9 @@ public class RoomServiceImpl implements RoomService {
                 return roomRepository.save(newRoom);
             }
         }
-        return roomRepository.save(room);
+        Room savedRoom = roomRepository.save(room);
+        Zone defaultZone = zoneService.createDefaultZone();
+        return zoneService.addZoneToRoom(defaultZone, savedRoom);
     }
 
     @Override

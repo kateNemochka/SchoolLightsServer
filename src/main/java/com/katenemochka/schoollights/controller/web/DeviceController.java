@@ -8,8 +8,11 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,10 +44,7 @@ public class DeviceController {
     @GetMapping("/devices")
     public String getAllDevices(Model model) {
         List<Device> devices = deviceService.getAll();
-        List<DeviceDto> deviceDTOs = devices.stream()
-                .map(DeviceDto::new)
-                .collect(Collectors.toList());
-        model.addAttribute("devices", deviceDTOs);
+        model.addAttribute("devices", devices);
         return "lists/devices-list";
     }
 
@@ -54,5 +54,18 @@ public class DeviceController {
         model.addAttribute("device", device);
         //TODO: create form for device
         return "forms/device-form";
+    }
+
+    @PostMapping("/devices/{id}")
+    public String updateDeviceById(@PathVariable Long id,
+                                   @ModelAttribute Device device,
+                                   BindingResult result) {
+        if (result.hasErrors()) {
+            return "forms/device-form";
+        }
+        if (device != null && id.equals(device.getId())) {
+            deviceService.createOrUpdate(device);
+        }
+        return "redirect:/devices";
     }
 }
