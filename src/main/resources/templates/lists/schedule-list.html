@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="uk">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Розклад | БАЛ "Гармонія"</title>
+    <link th:replace="partials/_css-links"/>
+  </head>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:../../partials/_navbar.html -->
+      <div th:replace="partials/_navbar"></div>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:../../partials/_sidebar.html -->
+        <div th:replace="partials/_sidebar"></div>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="row">
+              <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h2 class="font-weight-semibold">Розклад</h2>
+                    <p class="card-description text-muted">
+                      Розклад режимів роботи системи освітлення для робочих днів</p>
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>№</th>
+                          <th>Початок</th>
+                          <th>Кінець</th>
+                          <th>Період</th>
+                          <th>Тривалість</th>
+                          <th>Вираз</th>
+                          <th><a class="btn btn-rounded btn-primary" href="/schedule/new">Додати період</a></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr th:each="event, iStat: ${schedule}">
+                          <td th:text="${iStat.index + 1}"></td>
+                          <td th:text="${event.periodStart}"></td>
+                          <td th:text="${event.periodEnd}"></td>
+                          <td th:text="${event.period.displayName}" class="font-weight-medium"></td>
+                          <td th:text="${(event.periodEnd.getHour()*60+event.periodEnd.getMinute())
+                                        - (event.periodStart.getHour()*60+event.periodStart.getMinute()) + ' хв'}"></td>
+                          <td th:text="${event.expression}" class="font-weight-lighter"></td>
+                          <td>
+                            <a type="button" class="btn btn-icons btn-inverse-light btn-rounded"
+                               th:href="@{/schedule/{eventId}(eventId=${event.id})}">
+                              <i class="mdi mdi-pencil-outline"></i></a>
+                            <a type="button" class="btn btn-icons btn-inverse-light btn-rounded"
+                               th:href="@{/schedule/{eventId}/delete(eventId=${event.id})}">
+                            <i class="mdi mdi-trash-can-outline"></i></a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:../../partials/_footer.html -->
+          <footer th:replace="partials/_footer"></footer>
+          <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <script th:replace="partials/_js-links"></script>
+  </body>
+</html>

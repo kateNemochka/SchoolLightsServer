@@ -1,13 +1,12 @@
 package com.katenemochka.schoollights.service;
 
-import com.katenemochka.schoollights.domain.Room;
-import com.katenemochka.schoollights.domain.Schedule;
+import com.katenemochka.schoollights.domain.ScheduleEvent;
 
 import java.util.List;
 
 public interface ScheduleService {
-    List<Schedule> getAll();
-    Schedule getScheduleById(Long id);
-    Schedule createOrUpdate(Schedule schedule);
-    void deleteScheduleById(Long id);
+    List<ScheduleEvent> getAll();
+    ScheduleEvent getScheduleEventById(Long id);
+    ScheduleEvent createOrUpdate(ScheduleEvent scheduleEvent);
+    void deleteScheduleEventById(Long id);
 }

@@ -1,7 +1,6 @@
 package com.katenemochka.schoollights.domain.types;
 
-import com.katenemochka.schoollights.domain.Room;
-import com.katenemochka.schoollights.domain.Schedule;
+import com.katenemochka.schoollights.domain.ScheduleEvent;
 import lombok.Getter;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
@@ -22,7 +21,7 @@ public class Period implements Comparable<Period> {
     private String name;
     private String displayName;
     @OneToMany(mappedBy = "period")
-    List<Schedule> scheduleEntries;
+    List<ScheduleEvent> scheduleEventEntries;
 
     public Period() {
     }
@@ -41,12 +40,12 @@ public class Period implements Comparable<Period> {
         return 0;
     }
 
-    public List<Schedule> getScheduleEntries() {
-        return scheduleEntries;
+    public List<ScheduleEvent> getScheduleEventEntries() {
+        return scheduleEventEntries;
     }
 
-    public void setScheduleEntries(List<Schedule> scheduleEntries) {
-        this.scheduleEntries = scheduleEntries;
+    public void setScheduleEventEntries(List<ScheduleEvent> scheduleEventEntries) {
+        this.scheduleEventEntries = scheduleEventEntries;
     }
 
     @Override
