@@ -1,4 +1,4 @@
-package com.katenemochka.schoollights.domain.types;
+package com.katenemochka.schoollights.domain;
 
 public enum EventType {
     PERIOD,

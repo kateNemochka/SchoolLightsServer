@@ -1,6 +1,5 @@
 package com.katenemochka.schoollights.domain;
 
-import com.katenemochka.schoollights.domain.types.DeviceType;
 import com.katenemochka.schoollights.utils.LocalDateTimeAttributeConverter;
 import lombok.Getter;
 import lombok.Setter;

@@ -33,17 +33,17 @@
                             <input type="hidden" class="form-control" id="id"
                                    th:field="*{id}">
                             <label for="periodStart">Початок</label>
-                            <input type="time" class="form-control" id="periodStart"
+                            <input type="time" class="form-control" id="periodStart" required
                                    th:field="*{periodStart}">
                           </div>
                           <div class="form-group">
                             <label for="periodEnd">Кінець</label>
-                            <input type="time" class="form-control" id="periodEnd"
+                            <input type="time" class="form-control" id="periodEnd" required
                                    th:field="*{periodEnd}">
                           </div>
                           <div class="form-group">
                             <label for="zone-type">Тип періоду</label>
-                            <select th:field="*{period.id}" id="zone-type" class="form-control">
+                            <select th:field="*{period.id}" id="zone-type" class="form-control" required>
                               <option th:each="p : ${periodTypes}" th:value="${p.id}" th:text="${p.displayName}">
                               </option>
                             </select>

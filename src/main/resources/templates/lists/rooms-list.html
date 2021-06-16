@@ -21,7 +21,7 @@
             <div class="row">
               <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
-                  <div class="card-body">
+                  <div class="card-body table-responsive">
                     <h2 class="font-weight-semibold">Приміщення</h2>
                     <p class="card-description text-muted">Список приміщень БАЛ "Гармонія"</p>
                     <table class="table table-hover">
@@ -34,7 +34,11 @@
                           <th>Внутрішня</th>
                           <th>Контролер</th>
                           <th>Деталі</th>
-                          <th><a class="btn btn-rounded btn-primary" href="/rooms/new">Нове</a></th>
+                          <th class="pt-1 pb-1">
+                            <a type="button" class="btn btn-icons btn-inverse-primary btn-rounded"
+                               th:href="@{/rooms/new}">
+                              <i class="mdi mdi-plus"></i></a>
+                          </th>
                         </tr>
                       </thead>
                       <tbody>

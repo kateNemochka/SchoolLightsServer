@@ -47,6 +47,7 @@ public class RoomServiceImpl implements RoomService {
             if (roomOptional.isPresent()) {
                 Room newRoom = roomOptional.get();
                 newRoom.setName(room.getName());
+                newRoom.setMqttName(room.getMqttName());
                 newRoom.setPurpose(room.getPurpose());
                 newRoom.setDescription(room.getDescription());
                 newRoom.setColorTemperature(room.getColorTemperature());

@@ -33,7 +33,7 @@
                             <input type="hidden" class="form-control" id="id"
                                    th:field="*{id}">
                             <label for="macAddress">MAC-адреса</label>
-                            <input type="text" class="form-control" id="macAddress"
+                            <input type="text" class="form-control" id="macAddress" required
                                    th:field="*{macAddress}"
                                    placeholder="FF:FF:FF:FF:FF:FF"
                                    th:readonly="*{macAddress != null}">
@@ -52,12 +52,12 @@
                           </div>
                           <div class="form-group">
                             <label for="sensorsUpdateTimeout">Період оновлення даних з датчиків (хв)</label>
-                            <input type="number" class="form-control" id="sensorsUpdateTimeout"
+                            <input type="number" class="form-control" id="sensorsUpdateTimeout" required
                                    th:field="*{sensorsUpdateTimeout}">
                           </div>
                           <div class="form-group">
                             <label for="zoneTypeDescription">Період оновлення даних мікроконтролера (хв)</label>
-                            <input type="number" class="form-control" id="zoneTypeDescription"
+                            <input type="number" class="form-control" id="zoneTypeDescription" required
                                    th:field="*{statusUpdateTimeout}">
                           </div>
 

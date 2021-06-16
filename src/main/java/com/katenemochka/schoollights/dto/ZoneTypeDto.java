@@ -1,7 +1,7 @@
 package com.katenemochka.schoollights.dto;
 
-import com.katenemochka.schoollights.domain.types.Period;
-import com.katenemochka.schoollights.domain.types.ZoneType;
+import com.katenemochka.schoollights.domain.Period;
+import com.katenemochka.schoollights.domain.ZoneType;
 import lombok.Data;
 
 import java.util.LinkedHashMap;

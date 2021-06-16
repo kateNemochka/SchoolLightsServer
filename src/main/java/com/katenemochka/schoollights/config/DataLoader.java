@@ -1,18 +1,11 @@
 package com.katenemochka.schoollights.config;
 
-import com.katenemochka.schoollights.dao.DeviceTypeRepository;
-import com.katenemochka.schoollights.dao.ModeRepository;
-import com.katenemochka.schoollights.dao.PeriodRepository;
 import com.katenemochka.schoollights.domain.User;
-import com.katenemochka.schoollights.domain.types.Mode;
-import com.katenemochka.schoollights.domain.types.Period;
 import com.katenemochka.schoollights.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
-
-import java.util.*;
 
 @Component
 public class DataLoader implements ApplicationRunner {

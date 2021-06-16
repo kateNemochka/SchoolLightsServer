@@ -1,10 +1,6 @@
 package com.katenemochka.schoollights.domain;
 
-import com.katenemochka.schoollights.domain.types.EventType;
-import com.katenemochka.schoollights.domain.types.Period;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;

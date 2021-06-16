@@ -1,7 +1,7 @@
 package com.katenemochka.schoollights.service.impl;
 
 import com.katenemochka.schoollights.dao.ModeRepository;
-import com.katenemochka.schoollights.domain.types.Mode;
+import com.katenemochka.schoollights.domain.Mode;
 import com.katenemochka.schoollights.service.ModeService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;

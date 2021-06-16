@@ -35,7 +35,9 @@
                           <th>Зміна режиму</th>
                           <th>Оновлення датчиків</th>
                           <th>Оновлення пристрою</th>
-                          <th><a class="btn btn-rounded btn-primary" href="/microcontrollers/createUpdate">Додати пристрій</a></th>
+                          <th class="pt-1 pb-1"><a type="button" class="btn btn-icons btn-inverse-primary btn-rounded"
+                                 th:href="@{/microcontrollers/createUpdate}">
+                            <i class="mdi mdi-plus"></i></a></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -50,8 +52,9 @@
                           <td th:text="${micro.modeUpdate}">1</td>
                           <td th:text="${micro.sensorsUpdateTimeout} + ' хв'">1</td>
                           <td th:text="${micro.statusUpdateTimeout} + ' хв'">1</td>
-                          <td><a type="button" class="btn btn-light"
-                                    th:href="@{/microcontrollers/{micro_id}(micro_id=${micro.id})}">Детальніше</a></td>
+                          <td><a type="button" class="btn btn-icons btn-inverse-light btn-rounded"
+                                 th:href="@{/microcontrollers/{micro_id}(micro_id=${micro.id})}">
+                            <i class="mdi mdi-pencil-outline"></i></a></td>
                         </tr>
                       </tbody>
                     </table>

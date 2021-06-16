@@ -1,7 +1,6 @@
 package com.katenemochka.schoollights.service;
 
-import com.katenemochka.schoollights.domain.Device;
-import com.katenemochka.schoollights.domain.types.Mode;
+import com.katenemochka.schoollights.domain.Mode;
 
 import java.util.List;
 

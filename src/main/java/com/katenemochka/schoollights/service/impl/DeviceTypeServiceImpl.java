@@ -1,7 +1,7 @@
 package com.katenemochka.schoollights.service.impl;
 
 import com.katenemochka.schoollights.dao.DeviceTypeRepository;
-import com.katenemochka.schoollights.domain.types.DeviceType;
+import com.katenemochka.schoollights.domain.DeviceType;
 import com.katenemochka.schoollights.service.DeviceTypeService;
 import lombok.Data;
 import org.springframework.stereotype.Service;

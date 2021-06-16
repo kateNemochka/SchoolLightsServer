@@ -1,6 +1,5 @@
-package com.katenemochka.schoollights.domain.types;
+package com.katenemochka.schoollights.domain;
 
-import com.katenemochka.schoollights.domain.Zone;
 import lombok.Data;
 
 import javax.persistence.*;

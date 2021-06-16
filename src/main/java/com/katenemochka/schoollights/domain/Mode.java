@@ -1,29 +1,30 @@
-package com.katenemochka.schoollights.domain.types;
+package com.katenemochka.schoollights.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
+/*Спосіб керування освітленням*/
 @Entity
-@Table(name = "device_types")
+@Table(name = "modes")
 @Setter
 @Getter
 @NoArgsConstructor
-public class DeviceType {
+public class Mode {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String displayName;
-    private boolean onePerZone;
+    @OneToMany(mappedBy = "mode")
+    List<ModeTimestamp> zoneModesTimestamps = new ArrayList<>();
 
-    public DeviceType(String name, String displayName, boolean onePerZone) {
+    public Mode(String name, String displayName) {
         this.name = name;
         this.displayName = displayName;
-        this.onePerZone = onePerZone;
     }
 }

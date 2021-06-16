@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Приміщення | БАЛ "Гармонія"</title>
+    <title>Вихідний | БАЛ "Гармонія"</title>
     <link th:replace="partials/_css-links"/>
   </head>
   <body>
@@ -24,34 +24,37 @@
                   <div class="col-12">
                     <div class="card">
                       <div class="card-body">
-                        <h4 class="font-weight-semibold">Зона приміщення</h4>
-                        <p class="card-description text-muted">Дані про зону та її датчики</p>
+                        <h4 class="font-weight-semibold">Вихідний</h4>
+                        <p class="card-description text-muted">Канікули, один або декілька вихідних днів</p>
                         <form class="forms-sample"
-                              th:action="@{/rooms/{roomId}/zones/{action}(roomId=*{room.id},action=${operation=='new' ? 'new' : id})}"
-                              th:object="${zone}" method="post">
+                              th:action="@{/schedule/daysOff/{action}(action=${operation=='new' ? 'new' : dayOff.id})}"
+                              th:object="${dayOff}" method="post">
+                          <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+                            <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+                          </div>
                           <div class="form-group">
                             <input type="hidden" class="form-control" id="id"
-                                   th:field="*{id}">
-                            <input type="hidden" class="form-control" id="room_id"
-                                   th:field="*{room}">
-
-                            <label for="name">Назва</label>
-                            <input type="text" class="form-control" id="name" required
-                                   th:field="*{name}"
-                                   placeholder="000">
+                                   th:field="*{id}" required>
+                            <label for="periodStart">Початок</label>
+                            <input type="date" class="form-control" id="periodStart" required
+                                   th:field="*{startDate}">
                           </div>
-
                           <div class="form-group">
-                            <label for="zone-type">Тип зони</label>
-                            <select th:field="*{zoneType.id}" id="zone-type" class="form-control">
-                              <option th:each="z : ${zone_types}" th:value="${z.id}" th:text="${z.name}">
-                              </option>
+                            <label for="periodEnd">Кінець</label>
+                            <input type="date" class="form-control" id="periodEnd"
+                                   th:field="*{endDate}">
+                          </div>
+                          <div class="form-group">
+                            <label for="dayOffType">Тип зони</label>
+                            <select name="dayOffType" id="dayOffType" th:field="*{type}" class="form-control">
+                              <option th:each="dayOffType : ${T(com.katenemochka.schoollights.domain.types.DayOffType).values()}"
+                                      th:value="${dayOffType}" th:text="${dayOffType.displayName}"></option>
                             </select>
                           </div>
 
                           <button type="submit" class="btn btn-success mr-2">Зберегти</button>
-                          <a th:href="@{/rooms/{roomId}(roomId=*{room.id})}" class="btn btn-light">Скасувати</a>
-                          <a th:href="@{/rooms/{roomId}/zones/{zoneId}/delete(roomId=*{room.id},zoneId=${zone.id})}"
+                          <a th:href="@{/schedule/daysOff}" class="btn btn-light">Скасувати</a>
+                          <a th:href="@{/schedule/daysOff/{dayId}/delete(dayId=${dayOff.id})}"
                              th:if="*{id}"
                              class="btn btn-danger">Видалити</a>
                         </form>

@@ -9,12 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-/**
- * @Classname PushCallback
- * @Description Consumer monitoring
- * @Date 2019/4/11 23:31
- * @Created by Jack
- */
+
 @Component
 public class Callback implements MqttCallback {
     private static final Logger logger = LoggerFactory.getLogger(MqttSpringClient.class);

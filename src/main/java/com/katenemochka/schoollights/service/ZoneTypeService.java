@@ -1,6 +1,6 @@
 package com.katenemochka.schoollights.service;
 
-import com.katenemochka.schoollights.domain.types.ZoneType;
+import com.katenemochka.schoollights.domain.ZoneType;
 import java.util.List;
 
 public interface ZoneTypeService {

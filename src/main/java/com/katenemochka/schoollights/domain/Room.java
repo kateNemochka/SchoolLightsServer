@@ -2,6 +2,7 @@ package com.katenemochka.schoollights.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class Room {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     private String name; //207
+    private String mqttName;
     private int floor; //2
     private String purpose; //Кабінет інформатики
     private String description;

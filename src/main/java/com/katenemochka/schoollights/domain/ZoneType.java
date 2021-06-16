@@ -1,17 +1,13 @@
-package com.katenemochka.schoollights.domain.types;
+package com.katenemochka.schoollights.domain;
 
-import com.katenemochka.schoollights.domain.Zone;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "zone_types")

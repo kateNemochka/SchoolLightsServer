@@ -1,7 +1,7 @@
 package com.katenemochka.schoollights.service.impl;
 
 import com.katenemochka.schoollights.dao.ZoneTypeRepository;
-import com.katenemochka.schoollights.domain.types.ZoneType;
+import com.katenemochka.schoollights.domain.ZoneType;
 import com.katenemochka.schoollights.service.ZoneTypeService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -76,7 +76,8 @@
                       <div class="card-body">
                         <!--Назва-->
                         <h4 class="font-weight-medium" th:text="${zone.name}">Зона теоретичних занять</h4>
-                        <h5 class="font-weight-lighter">Тип:
+                        <h5 class="font-weight-lighter"
+                            th:if="${zone.zoneType != null}">Тип:
                           <span th:text="${zone.zoneType.name}"
                                 class="font-weight-normal"></span></h5>
                         <a type="button" class="btn btn-secondary btn-rounded mb-2"

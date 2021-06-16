@@ -1,7 +1,6 @@
 package com.katenemochka.schoollights.service;
 
-import com.katenemochka.schoollights.domain.Device;
-import com.katenemochka.schoollights.domain.types.Period;
+import com.katenemochka.schoollights.domain.Period;
 
 import java.util.List;
 

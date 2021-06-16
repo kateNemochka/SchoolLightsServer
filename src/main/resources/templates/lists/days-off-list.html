@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Типи зон | БАЛ "Гармонія"</title>
+    <title>Вихідні | БАЛ "Гармонія"</title>
     <link th:replace="partials/_css-links"/>
   </head>
   <body>
@@ -22,31 +22,36 @@
               <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body table-responsive">
-                    <h2 class="font-weight-semibold">Типи зон</h2>
-                    <p class="card-description text-muted">Для налаштування норм рівнів освітленості та часових проміжків</p>
+                    <h2 class="font-weight-semibold">Вихідні</h2>
+                    <p class="card-description text-muted">
+                      Перелік канікул та вихідних, що припадають на робочі дні</p>
                     <table class="table table-hover">
                       <thead>
                         <tr>
                           <th>№</th>
+                          <th>Дата</th>
+                          <th>Кінець</th>
                           <th>Тип</th>
-                          <th>Min Лк</th>
-                          <th>Max Лк</th>
-                          <th>Опис</th>
-                          <th class="pt-1 pb-1"><a type="button" class="btn btn-icons btn-inverse-primary btn-rounded"
-                                                   th:href="@{/zones/zone-types/createUpdate}">
-                            <i class="mdi mdi-plus"></i></a></th>
+                          <th class="pt-1 pb-1">
+                            <a type="button" class="btn btn-icons btn-inverse-primary btn-rounded"
+                               th:href="@{/schedule/daysOff/new}">
+                              <i class="mdi mdi-plus"></i></a>
+                            </th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr th:each="zoneType, iStat: ${zoneTypes}">
+                        <tr th:each="day, iStat: ${daysOff}">
                           <td th:text="${iStat.index + 1}"></td>
-                          <td th:text="${zoneType.name}" class="font-weight-medium"></td>
-                          <td th:text="${zoneType.lightMinimum}"></td>
-                          <td th:text="${zoneType.lightMaximum}"></td>
-                          <td th:text="${zoneType.description}" class="font-weight-lighter"></td>
-                          <td><a type="button" class="btn btn-icons btn-inverse-light btn-rounded"
-                                 th:href="@{/zones/zone-types/{zone_type_id}(zone_type_id=${zoneType.id})}">
-                            <i class="mdi mdi-pencil"></i></a>
+                          <td th:text="${day.startDate}"></td>
+                          <td th:text="${day.endDate}"></td>
+                          <td th:text="${day.type.displayName}"></td>
+                          <td>
+                            <a type="button" class="btn btn-icons btn-inverse-light btn-rounded"
+                               th:href="@{/schedule/daysOff/{eventId}(eventId=${day.id})}">
+                              <i class="mdi mdi-pencil-outline"></i></a>
+                            <a type="button" class="btn btn-icons btn-inverse-light btn-rounded"
+                               th:href="@{/schedule/daysOff/{eventId}/delete(eventId=${day.id})}">
+                            <i class="mdi mdi-trash-can-outline"></i></a>
                           </td>
                         </tr>
                       </tbody>

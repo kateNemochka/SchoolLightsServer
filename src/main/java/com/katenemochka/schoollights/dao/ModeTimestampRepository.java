@@ -1,8 +1,8 @@
 package com.katenemochka.schoollights.dao;
 
 import com.katenemochka.schoollights.domain.Zone;
-import com.katenemochka.schoollights.domain.types.Mode;
-import com.katenemochka.schoollights.domain.types.ModeTimestamp;
+import com.katenemochka.schoollights.domain.Mode;
+import com.katenemochka.schoollights.domain.ModeTimestamp;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.katenemochka.schoollights.service.impl;
 
 import com.katenemochka.schoollights.dao.PeriodRepository;
-import com.katenemochka.schoollights.domain.types.Period;
+import com.katenemochka.schoollights.domain.Period;
 import com.katenemochka.schoollights.service.PeriodService;
 import lombok.Data;
 import org.springframework.stereotype.Service;

@@ -4,8 +4,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.katenemochka.schoollights.domain.Room;
 import com.katenemochka.schoollights.domain.Zone;
-import com.katenemochka.schoollights.domain.types.Period;
-import com.katenemochka.schoollights.domain.types.ZoneType;
+import com.katenemochka.schoollights.domain.Period;
+import com.katenemochka.schoollights.domain.ZoneType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -41,10 +41,10 @@ public class MqttPublisher {
         String topic = "school/floor-" + floor + "/room-" + room + "/mode";
 
         payload = new JSONObject();
-        payload.put("mode", zone.getMode().getName().toLowerCase());
+        /*payload.put("mode", zone.getMode().getName().toLowerCase());
         payload.put("date", LocalDateTime.now().toLocalDate().toString());
         payload.put("cust_dim", zone.getDimmerValue());
-        payload.put("mode_time", zone.getModeTimeout());
+        payload.put("mode_time", zone.getModeTimeout());*/
 
         mqttSpringClient.publish(1, true, topic, payload.toString());
     }
@@ -60,14 +60,14 @@ public class MqttPublisher {
 
         payload = new JSONObject();
         payload.put("room", roomName);
-        payload.put("period", room.getPeriod().getName().toLowerCase());
-        payload.put("mode", zone.getMode().getName());
+        /*payload.put("period", room.getPeriod().getName().toLowerCase());*/
+        /*payload.put("mode", zone.getMode().getName());*/
         payload.put("zone", zone.getId());
-        payload.put("row_number", zone.getRowList().get(0).getRowNumberFromWindow());
+        //payload.put("row_number", zone.getRowList().get(0).getRowNumberFromWindow());
         payload.put("room_type", room.getPurpose());
         payload.put("sens_upd", 60);
         payload.put("stat_upd", 180);
-        payload.put("cust_dim", zone.getDimmerValue());
+        /*payload.put("cust_dim", zone.getDimmerValue());*/
         payload.put("min_lux", zoneType.getLightMinimum());
         payload.put("delta_lux", zoneType.getLightMaximum() - zoneType.getLightMinimum());
 

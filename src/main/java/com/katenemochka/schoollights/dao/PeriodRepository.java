@@ -1,6 +1,6 @@
 package com.katenemochka.schoollights.dao;
 
-import com.katenemochka.schoollights.domain.types.Period;
+import com.katenemochka.schoollights.domain.Period;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

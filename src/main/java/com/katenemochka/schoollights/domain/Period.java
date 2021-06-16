@@ -1,6 +1,5 @@
-package com.katenemochka.schoollights.domain.types;
+package com.katenemochka.schoollights.domain;
 
-import com.katenemochka.schoollights.domain.ScheduleEvent;
 import lombok.Getter;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;

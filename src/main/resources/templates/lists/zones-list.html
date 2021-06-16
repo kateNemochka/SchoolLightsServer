@@ -21,7 +21,7 @@
             <div class="row">
               <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
-                  <div class="card-body">
+                  <div class="card-body table-responsive">
                     <h2 class="font-weight-semibold">Зони</h2>
                     <p class="card-description text-muted">Усі створені зони</p>
                     <table class="table table-hover">
@@ -42,9 +42,11 @@
                           <td th:text="${zone.zoneType.name}">Датчик руху</td>
                           <td th:text="${zone.room.name}">207</td>
                           <td th:text="${zone.rows.size()}">Теоретична зона</td>
-                          <td><a type="button" class="btn btn-light"
-                                    th:href="@{/rooms/{roomId}/zones/{zoneId}
-                                              (zoneId=${zone.id},roomId=${zone.room.id})}">Детальніше</a></td>
+                          <td><a type="button" class="btn btn-icons btn-inverse-light btn-rounded"
+                                 th:href="@{/rooms/{roomId}/zones/{zoneId}
+                                              (zoneId=${zone.id},roomId=${zone.room.id})}">
+                            <i class="mdi mdi-pencil"></i></a>
+                          </td>
                         </tr>
                       </tbody>
                     </table>
