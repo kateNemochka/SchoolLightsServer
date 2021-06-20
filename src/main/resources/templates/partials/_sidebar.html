@@ -1,0 +1,101 @@
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+  <ul class="nav">
+    <li class="nav-item nav-category">Навігація</li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="collapse" href="#roomsByFloors" aria-expanded="false" aria-controls="ui-basic">
+        <i class="menu-icon typcn typcn-coffee"></i>
+        <span class="menu-title">Поверхи</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="roomsByFloors">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a class="nav-link" href="/rooms">Усі</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/rooms/floor-1">1 поверх</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/rooms/floor-2">2 поверх</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/rooms/floor-3">3 поверх</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/rooms/floor-4">4 поверх</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="nav-item nav-category">Налаштування</li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="collapse" href="#rooms-menu" aria-expanded="false" aria-controls="ui-basic">
+        <i class="menu-icon typcn typcn-coffee"></i>
+        <span class="menu-title">Приміщення</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="rooms-menu">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a class="nav-link" href="/rooms">Список приміщень</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/zones}">Зони</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/zones/zone-types}">Типи зон</a>
+          </li>
+
+        </ul>
+      </div>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="collapse" href="#devices-menu" aria-expanded="false" aria-controls="ui-basic">
+        <i class="menu-icon typcn typcn-coffee"></i>
+        <span class="menu-title">Пристрої</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="devices-menu">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/microcontrollers}">Мікроконтролери</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/devices}">Кінцеві пристрої</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/devices/device-types}">Типи пристроїв</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="collapse" href="#schedule-menu" aria-expanded="false" aria-controls="ui-basic">
+        <i class="menu-icon typcn typcn-coffee"></i>
+        <span class="menu-title">Розклад</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="schedule-menu">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/schedule}">Розклад</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/schedule/daysOff}">Вихідні</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" th:href="@{/modes}" >
+        <i class="menu-icon typcn typcn-coffee"></i>
+        <span class="menu-title">Режими та періоди роботи</span>
+      </a>
+    </li>
+
+  </ul>
+</nav>

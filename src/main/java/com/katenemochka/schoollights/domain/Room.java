@@ -1,102 +1,34 @@
 package com.katenemochka.schoollights.domain;
 
-import com.katenemochka.schoollights.domain.types.Mode;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "rooms")
+@Setter
+@Getter
 public class Room {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long id;
     private String name; //207
+    private String mqttName;
     private int floor; //2
     private String purpose; //Кабінет інформатики
     private String description;
-    private boolean isInner;
-    @ManyToOne
-    @JoinColumn(name="mode_id")
-    private Mode mode;
-    @OneToMany(mappedBy = "room")
-    private List<Zone> zones;
+    private boolean innerRoom;
+    private int colorTemperature; //K
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Zone> zones = new ArrayList<>();
     @OneToOne(mappedBy = "room")
     private Microcontroller microcontroller;
 
-
     public Room() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getFloor() {
-        return floor;
-    }
-
-    public void setFloor(int floor) {
-        this.floor = floor;
-    }
-
-    public String getPurpose() {
-        return purpose;
-    }
-
-    public void setPurpose(String purpose) {
-        this.purpose = purpose;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Mode getMode() {
-        return mode;
-    }
-
-    public void setMode(Mode mode) {
-        this.mode = mode;
-    }
-
-    public List<Zone> getZones() {
-        return zones;
-    }
-
-    public void setZones(List<Zone> zones) {
-        this.zones = zones;
-    }
-
-    public Microcontroller getMicrocontroller() {
-        return microcontroller;
-    }
-
-    public void setMicrocontroller(Microcontroller microcontroller) {
-        this.microcontroller = microcontroller;
-    }
-
-    public boolean isInner() {
-        return isInner;
-    }
-
-    public void setInner(boolean inner) {
-        isInner = inner;
+        colorTemperature = 3000;
     }
 }

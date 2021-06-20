@@ -1,50 +1,36 @@
 package com.katenemochka.schoollights.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="lights_row")
+@Setter
+@Getter
 public class Row {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long id;
     private int rowNumberFromWindow;
-    private int customDimValue;
     @ManyToOne
     @JoinColumn(name="zone_id")
     private Zone zone;
+    @OneToMany(mappedBy = "row", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Device> devices = new ArrayList<>();
 
     public Row() {
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-    public Zone getZone() {
-        return zone;
-    }
-
-    public void setZone(Zone zone) {
-        this.zone = zone;
-    }
-
-    public int getRowNumberFromWindow() {
-        return rowNumberFromWindow;
-    }
-
-    public void setRowNumberFromWindow(int rowNumberFromWindow) {
+    public Row(int rowNumberFromWindow) {
         this.rowNumberFromWindow = rowNumberFromWindow;
     }
 
-    public int getCustomDimValue() {
-        return customDimValue;
-    }
-
-    public void setCustomDimValue(int customDimValue) {
-        this.customDimValue = customDimValue;
+    public Row(Zone zone, int rowNumberFromWindow) {
+        this.zone = zone;
+        this.rowNumberFromWindow = rowNumberFromWindow;
     }
 }

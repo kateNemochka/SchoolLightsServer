@@ -1,56 +1,49 @@
 package com.katenemochka.schoollights.config;
 
-import com.katenemochka.schoollights.dao.ControlTypeRepository;
-import com.katenemochka.schoollights.dao.ModeRepository;
-import com.katenemochka.schoollights.domain.types.ControlType;
-import com.katenemochka.schoollights.domain.types.Mode;
+import com.katenemochka.schoollights.domain.User;
+import com.katenemochka.schoollights.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @Component
 public class DataLoader implements ApplicationRunner {
 
-    private ControlTypeRepository controlTypeRepository;
-    private ModeRepository modeRepository;
-
-    private Map<String, String> controlTypesMap;
-    private Map<String, String> modesMap;
+    DeviceTypeService deviceTypeService;
+    ModeService modeService;
+    PeriodService periodService;
+    RoleService roleService;
+    UserService userService;
 
     @Autowired
-    public DataLoader(ControlTypeRepository controlTypeRepository, ModeRepository modeRepository) {
-        this.controlTypeRepository = controlTypeRepository;
-        this.modeRepository = modeRepository;
-
-        controlTypesMap = new HashMap<>();
-        controlTypesMap.put("INIT", "Ініціалізація");
-        controlTypesMap.put("ADAPTIVE", "Адаптивна освітленість");
-        controlTypesMap.put("AUTO", "Автоматичний");
-        controlTypesMap.put("FULL_POWER", "Повна потужність");
-        controlTypesMap.put("MANUAL", "Ручний режим");
-        controlTypesMap.put("OFF", "Вимкнути");
-        controlTypesMap.put("PRESENTATION", "Режим презентації");
-
-        modesMap = new HashMap<>();
-        modesMap.put("LESSON", "Урок");
-        modesMap.put("BREAK", "Перерва");
-        modesMap.put("PASSIVE", "Пасивний режим");
+    public DataLoader(DeviceTypeService deviceTypeService, ModeService modeService,
+                      PeriodService periodService, RoleService roleService, UserService userService) {
+        this.deviceTypeService = deviceTypeService;
+        this.modeService = modeService;
+        this.periodService = periodService;
+        this.roleService = roleService;
+        this.userService = userService;
     }
 
     public void run(ApplicationArguments args) {
-        for (String controlTypeName : controlTypesMap.keySet()) {
-            if (controlTypeRepository.findByName(controlTypeName) != null) {
-                controlTypeRepository.save(new ControlType(controlTypeName, controlTypesMap.get(controlTypeName)));
-            }
+        deviceTypeService.loadDefaultData();
+        modeService.loadDefaultData();
+        periodService.loadDefaultData();
+        roleService.loadDefaultData();
+
+        User user = new User();
+        user.setEmail("test@email.com");
+        user.setPassword("testadminuser");
+        user.setFirstName("user");
+        user.setLastName("surname");
+        user.setRole(roleService.getRoleByName("ROLE_ADMIN"));
+
+        User u = userService.getUserByEmail(user.getEmail());
+        if (u != null) {
+            user.setId(u.getId());
+            userService.createOrUpdateUser(user);
         }
-        for (String modeName : modesMap.keySet()) {
-            if (modeRepository.findByName(modeName) != null) {
-                modeRepository.save(new Mode(modeName, modesMap.get(modeName)));
-            }
-        }
+        userService.createOrUpdateUser(user);
     }
 }
